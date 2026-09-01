@@ -6,14 +6,13 @@
   border-radius: 20px;
   border: 1px solid #E2E8F0;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+	margin-bottom: 32px;
 }
 
 .client-list-header {
   margin: 0 0 32px;
   font-size: 28px;
-  font-weight: 600;
   color: #1E293B;
-  letter-spacing: -0.01em;
 }
 
 .client-cards-grid {

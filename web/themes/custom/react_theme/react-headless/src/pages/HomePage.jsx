@@ -1,5 +1,6 @@
 import TopicList from "../components/TopicList";
 import ClientList from "../components/ClientList";
+import Testimonials from "../components/Testimonials";
 import { useTranslation } from "react-i18next";
 
 export default function HomePage() {
@@ -12,6 +13,7 @@ export default function HomePage() {
       </h1>
       <TopicList />
 			<ClientList />
+			<Testimonials />
     </div>
   );
 }

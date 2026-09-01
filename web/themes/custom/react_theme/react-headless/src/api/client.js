@@ -178,4 +178,7 @@ export const addProject = async (projectData) => {
   return API_URL.post("/api/add-project?_format=json", payload);
 };
 
+// Client Testimonials
+export const getTestimonials = async () => API_URL.get("/api/testimonials?_format=json");
+
 export default API_URL;
