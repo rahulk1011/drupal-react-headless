@@ -60,6 +60,8 @@
     "title": "Titel",
     "subHeading": "Unterüberschrift",
     "description": "Beschreibung",
+		"image": "Bild",
+		"language": "Sprache",
     "enterTitle": "Thementitel eingeben",
     "enterSubHeading": "Kurze Unterüberschrift eingeben",
     "enterDescription": "Themenbeschreibung eingeben",
@@ -68,6 +70,12 @@
     "no": "Nein",
     "yes": "Ja"
   },
+
+	"testimonial": {
+		"addTestimonial": "Testimonial hinzufügen",
+		"enterTestimonial": "Testimonial eingeben",
+		"saveTestimonial": "Testimonial speichern"
+	},
 
   "task": {
     "createTask": "Neue Projekt-Tracker-Aufgabe erstellen",

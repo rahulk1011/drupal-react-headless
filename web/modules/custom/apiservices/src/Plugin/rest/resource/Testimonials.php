@@ -11,6 +11,7 @@ use Drupal\node\Entity\Node;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\file\Entity\File;
+use Drupal\Core\File\FileSystemInterface;
 
 /**
  * Provides a resource to get view modes by entity and bundle.
@@ -18,7 +19,8 @@ use Drupal\file\Entity\File;
  *   id = "testimonials_rest",
  *   label = @Translation("Testimonials API"),
  *   uri_paths = {
- *     "canonical" = "/api/testimonials"
+ *     "canonical" = "/api/testimonials",
+ *     "create" = "/api/add-testimonial"
  *   }
  * )
  */
@@ -101,6 +103,107 @@ class Testimonials extends ResourceBase
 				'message' => 'Testimonials',
 				'result' => $testimonial_data,
 			]);
+		} catch (\Exception $exception) {
+			return $this->exception_error_msg($exception->getMessage());
+		}
+	}
+
+	/**
+	 * Creates a new client_testimonial "testimonial" node with required image file upload. Admin-only.
+	 * Route: POST /api/add-testimonial
+	 */
+	public function post(Request $request)
+	{
+		if ($this->loggedUser->isAnonymous() || !in_array('administrator', $this->loggedUser->getRoles(), TRUE)) {
+			return new JsonResponse([
+				'status' => 'Error',
+				'message' => 'Administrator access required to create testimonials.',
+			], 403);
+		}
+
+		try {
+			$data = json_decode($request->getContent(), TRUE) ?: [];
+			$title = trim($data['title'] ?? '');
+			$client_name = trim($data['client_name'] ?? '');
+			$description = trim($data['description'] ?? '');
+			$base64_image = $data['image'] ?? '';
+			$image_name = trim($data['image_name'] ?? 'testimonial.jpg');
+
+			// Validate mandatory fields
+			if (empty($title) || empty($client_name) || empty($description) || empty($base64_image) ) {
+				return new JsonResponse([
+					'status' => 'Error',
+					'message' => 'Missing required fields: Title, Client Name, Description and Image are mandatory.',
+				], 400);
+			}
+
+			// Decode and process Base64 image
+			$file_id = NULL;
+			if (preg_match('/^data:image\/(\w+);base64,/', $base64_image)) {
+				$image_data = substr($base64_image, strpos($base64_image, ',') + 1);
+				$decoded_data = base64_decode($image_data);
+
+				if ($decoded_data !== FALSE) {
+					$directory = 'public://testimonial-images';
+					\Drupal::service('file_system')->prepareDirectory(
+						$directory,
+						FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS
+					);
+					$file_uri = \Drupal::service('file_system')->saveData(
+						$decoded_data,
+						$directory . '/' . $image_name,
+						FileSystemInterface::EXISTS_RENAME
+					);
+					if ($file_uri) {
+						$file = File::create([
+							'uri' => $file_uri,
+							'uid' => $this->loggedUser->id(),
+							'status' => 1,
+						]);
+						$file->save();
+						$file_id = $file->id();
+					}
+				}
+			}
+
+			if (!$file_id) {
+				return new JsonResponse([
+					'status' => 'Error',
+					'message' => 'Failed to process and save uploaded image.',
+				], 400);
+			}
+
+			// Build node data payload
+			$node_data = [
+				'type' => 'client_testimonial',
+				'title' => $title,
+				'field_client_name' => $client_name,
+				'field_description' => $description,
+				'status' => 1,
+				'field_content_image' => [
+					'target_id' => $file_id,
+					'alt' => $title,
+				],
+			];
+
+			$node = Node::create($node_data);
+			$node->save();
+
+			// Resolve image URL for response
+			$file_entity = File::load($file_id);
+			$image_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_entity->getFileUri());
+
+			return new JsonResponse([
+				'status' => 'Success',
+				'message' => 'Testimonial created successfully.',
+				'result' => [
+					'id' => $node->id(),
+					'title' => $node->getTitle(),
+					'client_name' => $client_name,
+					'description' => $description,
+					'testimonial_img' => $image_url,
+				],
+			], 201);
 		} catch (\Exception $exception) {
 			return $this->exception_error_msg($exception->getMessage());
 		}

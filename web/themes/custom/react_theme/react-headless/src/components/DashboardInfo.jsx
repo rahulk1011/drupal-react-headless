@@ -145,6 +145,32 @@ export default function DashboardInfo() {
           View User List
         </button>
       </div>
+			<div className="dashboard-topic-list">
+        <div className="topic-list-info">
+          <h2>Topic List</h2>
+          <p>Add new topics in the system</p>
+        </div>
+        <button
+          type="button"
+          className="btn-admin topic-list-btn"
+          onClick={() => navigate("/add-topic")}
+        >
+          Add New Topic
+        </button>
+      </div>
+			<div className="dashboard-testimonial-list">
+				<div className="testimonial-list-info">
+          <h2>Testimonial List</h2>
+          <p>Add new testimonials shared by clients</p>
+        </div>
+        <button
+          type="button"
+          className="btn-admin testimonial-list-btn"
+          onClick={() => navigate("/add-testimonial")}
+        >
+          Add New Testimonial
+        </button>
+			</div>
     </div>
   ) : (
     <div className="user-dashboard-container">

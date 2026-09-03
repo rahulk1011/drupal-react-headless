@@ -15,6 +15,7 @@ import AddTopic from "./components/AddTopic";
 import ProjectList from "./components/ProjectList";
 import AddProject from "./components/AddProject";
 import UserList from "./components/UserList";
+import AddTestimonial from "./components/AddTestimonial";
 
 type RouteProps = {
 	children: ReactNode;
@@ -126,6 +127,14 @@ function AppLayout() {
 							<ProtectedRoute>
 								<UserList />
 							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="/add-testimonial"
+						element={
+							<AdminRoute>
+								<AddTestimonial />
+							</AdminRoute>
 						}
 					/>
 				</Routes>

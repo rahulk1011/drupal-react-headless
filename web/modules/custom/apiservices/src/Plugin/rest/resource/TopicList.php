@@ -8,10 +8,9 @@ use Drupal\Core\Session\AccountProxyInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Drupal\node\Entity\Node;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpFoundation\Request;
-use Drupal\user\Entity\User;
 use Drupal\file\Entity\File;
+use Drupal\Core\File\FileSystemInterface;
 
 /**
  * Provides a resource to get view modes by entity and bundle.
@@ -32,23 +31,10 @@ class TopicList extends ResourceBase
 	 * @var \Drupal\Core\Session\AccountProxyInterface
 	 */
 	protected $loggedUser;
+
 	/**
 	 * Constructs a Drupal\rest\Plugin\ResourceBase object.
-	 *
-	 * @param array $config
-	 *   A configuration array which contains the information about the plugin instance.
-	 * @param string $module_id
-	 *   The module_id for the plugin instance.
-	 * @param mixed $module_definition
-	 *   The plugin implementation definition.
-	 * @param array $serializer_formats
-	 *   The available serialization formats.
-	 * @param \Psr\Log\LoggerInterface $logger
-	 *   A logger instance.
-	 * @param \Drupal\Core\Session\AccountProxyInterface $current_user
-	 *   A currently logged user instance.
 	 */
-
 	public function __construct(array $config, $module_id, $module_definition, array $serializer_formats, LoggerInterface $logger, AccountProxyInterface $current_user)
 	{
 		parent::__construct($config, $module_id, $module_definition, $serializer_formats, $logger);
@@ -71,8 +57,8 @@ class TopicList extends ResourceBase
 	}
 
 	/*
-    * Get All Topiclist API
-    */
+   * Get All Topiclist API
+   */
 	public function get(Request $request)
 	{
 		try {
@@ -91,13 +77,13 @@ class TopicList extends ResourceBase
 			$project_list_data = [];
 
 			foreach ($project_nodes as $node) {
-				// Load translated version if available.
 				if ($node->hasTranslation($langcode)) {
 					$node = $node->getTranslation($langcode);
 				}
 
 				$topic_fid = $node->get('field_content_image')->target_id;
-        $topic_image = File::load($topic_fid);
+				$topic_image = $topic_fid ? File::load($topic_fid) : NULL;
+				$image_url = $topic_image ? \Drupal::service('file_url_generator')->generateAbsoluteString($topic_image->getFileUri()) : '';
 
 				$project_list_data[] = [
 					'id' => $node->id(),
@@ -105,7 +91,7 @@ class TopicList extends ResourceBase
 					'subheading' => $node->get('field_sub_heading')->value ?? '',
 					'description' => $node->get('field_description')->value ?? '',
 					'trending' => $node->get('field_trending')->value ?? '',
-					'topic_img' => \Drupal::service('file_url_generator')->generateAbsoluteString($topic_image->getFileUri())
+					'topic_img' => $image_url,
 				];
 			}
 
@@ -121,10 +107,8 @@ class TopicList extends ResourceBase
 	}
 
 	/**
-	 * Creates a new topic_list "topic" node. Admin-only: this isn't
-	 * content any assigned user should be able to publish, unlike task
-	 * creation (which any authenticated user can do for themselves).
-	 * Route: POST /api/add-topic?_format=json
+	 * Creates a new topic_list "topic" node with required image file upload. Admin-only.
+	 * Route: POST /api/add-topic
 	 */
 	public function post(Request $request)
 	{
@@ -137,29 +121,81 @@ class TopicList extends ResourceBase
 
 		try {
 			$data = json_decode($request->getContent(), TRUE) ?: [];
-
 			$title = trim($data['title'] ?? '');
 			$subheading = trim($data['subheading'] ?? '');
 			$description = trim($data['description'] ?? '');
-			$trending = strtolower(trim((string) ($data['trending'] ?? 'no'))) === 'yes' ? 'yes' : 'no';
+			$trending = trim($data['trending'] ?? '');
+			$langcode = trim($data['langcode'] ?? $data['language'] ?? '');
+			$base64_image = $data['image'] ?? '';
+			$image_name = trim($data['image_name'] ?? 'topic.jpg');
 
-			if (empty($title) || empty($description)) {
+			// Validate mandatory fields
+			if (
+				empty($title) || empty($subheading) || empty($description) || empty($trending) || empty($langcode) || empty($base64_image) ) {
 				return new JsonResponse([
 					'status' => 'Error',
-					'message' => 'Missing required fields: Title and Description are mandatory.',
+					'message' => 'Missing required fields: Title, Subheading, Description, Trending, Language, and Image are mandatory.',
+				], 400);
+			}
+			$trending_val = strtolower($trending) === 'yes' ? 'yes' : 'no';
+
+			// Decode and process Base64 image
+			$file_id = NULL;
+			if (preg_match('/^data:image\/(\w+);base64,/', $base64_image)) {
+				$image_data = substr($base64_image, strpos($base64_image, ',') + 1);
+				$decoded_data = base64_decode($image_data);
+
+				if ($decoded_data !== FALSE) {
+					$directory = 'public://topic-images';
+					\Drupal::service('file_system')->prepareDirectory(
+						$directory,
+						FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS
+					);
+					$file_uri = \Drupal::service('file_system')->saveData(
+						$decoded_data,
+						$directory . '/' . $image_name,
+						FileSystemInterface::EXISTS_RENAME
+					);
+					if ($file_uri) {
+						$file = File::create([
+							'uri' => $file_uri,
+							'uid' => $this->loggedUser->id(),
+							'status' => 1,
+						]);
+						$file->save();
+						$file_id = $file->id();
+					}
+				}
+			}
+
+			if (!$file_id) {
+				return new JsonResponse([
+					'status' => 'Error',
+					'message' => 'Failed to process and save uploaded image.',
 				], 400);
 			}
 
-			$node = Node::create([
+			// Build node data payload
+			$node_data = [
 				'type' => 'topic_list',
+				'langcode' => $langcode,
 				'title' => $title,
 				'field_sub_heading' => $subheading,
 				'field_description' => $description,
-				'field_trending' => $trending,
+				'field_trending' => $trending_val,
 				'status' => 1,
-			]);
+				'field_content_image' => [
+					'target_id' => $file_id,
+					'alt' => $title,
+				],
+			];
 
+			$node = Node::create($node_data);
 			$node->save();
+
+			// Resolve image URL for response
+			$file_entity = File::load($file_id);
+			$image_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_entity->getFileUri());
 
 			return new JsonResponse([
 				'status' => 'Success',
@@ -169,7 +205,8 @@ class TopicList extends ResourceBase
 					'title' => $node->getTitle(),
 					'subheading' => $subheading,
 					'description' => $description,
-					'trending' => $trending,
+					'trending' => $trending_val,
+					'topic_img' => $image_url,
 				],
 			], 201);
 		} catch (\Exception $exception) {
@@ -179,11 +216,6 @@ class TopicList extends ResourceBase
 
 	/**
 	 * Returns a JSON error response for an exception.
-	 *
-	 * @param string $message
-	 *   The exception message.
-	 *
-	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	private function exception_error_msg($message)
 	{

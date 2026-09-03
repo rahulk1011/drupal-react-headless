@@ -60,6 +60,8 @@
     "title": "Title",
     "subHeading": "Sub Heading",
     "description": "Description",
+		"image": "Image",
+		"language": "Language",
     "enterTitle": "Enter topic title",
     "enterSubHeading": "Enter a short sub heading",
     "enterDescription": "Enter topic description",
@@ -68,6 +70,12 @@
     "no": "No",
     "yes": "Yes"
   },
+
+	"testimonial": {
+		"addTestimonial": "Add Testimonial",
+		"enterTestimonial": "Enter testimonial title",
+		"saveTestimonial": "Save Testimonial"
+	},
 
   "task": {
     "createTask": "Create New Project Tracker Task",

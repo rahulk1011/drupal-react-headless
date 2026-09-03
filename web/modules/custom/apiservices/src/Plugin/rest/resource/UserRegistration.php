@@ -81,6 +81,7 @@ class UserRegistration extends ResourceBase
 			// Security validation codes
 			$codes = [
 				'administrator' => '1011',
+				'manager' => '1401',
 				'client' => '6498',
 				'engineer' => '4965',
 			];

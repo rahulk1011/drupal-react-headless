@@ -6,13 +6,15 @@
 }
 
 .dashboard-projects-info,
-.dashboard-user-list {
+.dashboard-user-list,
+.dashboard-topic-list,
+.dashboard-testimonial-list {
   display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
-  gap: 16px;
-  padding: 20px 24px;
+  gap: 12px;
+  padding: 16px 24px;
   background: #E5FCC2;
   border: 1px solid #e5e7eb;
   border-left: 4px solid #BD1550;
@@ -30,36 +32,57 @@
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
+	box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+	border: 1px solid #003049;
 }
 
 .add-project-btn {
-  background-color: #BD1550;
+  background-color: #9a031e;
 }
 
 .add-project-btn:hover {
-  background-color: #033649;
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+  background-color: #5f0f40;
 }
 
 .user-list-btn {
-	background-color: #033649;
+	background-color: #3a5a40;
 }
 
 .user-list-btn:hover {
-  background-color: #BD1550;
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+  background-color: #344e41;
+}
+
+.topic-list-btn {
+	background-color: #023e8a;
+}
+
+.topic-list-btn:hover {
+  background-color: #03045e;
+}
+
+.testimonial-list-btn {
+	background-color: #457b9d;
+}
+
+.testimonial-list-btn:hover {
+	background-color: #1d3557;
 }
 
 .projects-nav-info h2,
-.user-list-info h2 {
+.user-list-info h2,
+.topic-list-info h2,
+.testimonial-list-info h2 {
   margin: 0 0 12px;
   font-size: 18px;
   font-weight: 600;
   color: #111827;
+	line-height: 1;
 }
 
 .projects-nav-info p,
-.user-list-info p {
+.user-list-info p,
+.topic-list-info p,
+.testimonial-list-info p {
   margin: 0;
   font-size: 16px;
   color: #6b7280;
@@ -218,7 +241,9 @@
 	}
 
   .dashboard-projects-info,
-	.dashboard-user-list {
+	.dashboard-user-list,
+	.dashboard-topic-list,
+	.dashboard-testimonial-list {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -226,7 +251,9 @@
 
 @media (max-width: 480px) {
 	.dashboard-projects-info,
-	.dashboard-user-list {
+	.dashboard-user-list,
+	.dashboard-topic-list,
+	.dashboard-testimonial-list {
     padding: 16px;
   }
 }

@@ -11,6 +11,7 @@ export default function RegisterPage() {
   // User Type Security Codes (Updated to 4 digits to match validation logic)
   const USER_TYPE_CODES = {
     administrator: "1011",
+		manager: "1401",
     client: "6498",
     engineer: "4965",
   };
@@ -149,6 +150,7 @@ export default function RegisterPage() {
             >
               <option value="">Select User Type</option>
               <option value="administrator">Administrator</option>
+							<option value="manager">Manager</option>
               <option value="client">Client</option>
               <option value="engineer">Engineer</option>
             </select>

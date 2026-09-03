@@ -118,10 +118,13 @@ export const getTopics = async (langcode = "en") => API_URL.get("/api/topiclist"
 
 export const addTopic = async (topicData) => {
   const payload = {
-    title: topicData.title,
-    subheading: topicData.subheading,
-    description: topicData.description,
-    trending: topicData.trending,
+    title: topicData.title || "",
+    subheading: topicData.subheading || "",
+    description: topicData.description || "",
+    trending: topicData.trending || "no",
+    langcode: topicData.langcode || topicData.language || "en",
+    image: topicData.image || "",
+    image_name: topicData.image_name || "topic_image.jpg",
   };
   return API_URL.post("/api/add-topic?_format=json", payload);
 };
@@ -180,5 +183,17 @@ export const addProject = async (projectData) => {
 
 // Client Testimonials
 export const getTestimonials = async () => API_URL.get("/api/testimonials?_format=json");
+
+export const addTestimonial = async (testimonialData) => {
+  const payload = {
+    title: testimonialData.title || "",
+		client_name: testimonialData.client_name || "",
+    description: testimonialData.description || "",
+    image: testimonialData.image || "",
+    image_name: testimonialData.image_name || "testimonial_image.jpg",
+  };
+
+  return API_URL.post("/api/add-testimonial?_format=json", payload);
+};
 
 export default API_URL;
