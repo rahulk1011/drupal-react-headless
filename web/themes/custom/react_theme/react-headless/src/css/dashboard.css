@@ -1,153 +1,168 @@
-/* Layout & Container */
-.dashboard-container {
-	max-width: 1920px;
-	margin: 0 auto;
-	padding: 48px;
+/* ============================================================================
+	DASHBOARD PAGES
+	========================================================================== */
+
+/* ── LAYOUT & CONTAINER ─────────────────────────────– */
+
+.dashboard-container,
+.userdashboard-container {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 48px;
 }
 
 .dashboard-loading {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
 }
 
-/* Header Banner */
+/* ── HEADER BANNER ──────────────────────────────────– */
+
 .dashboard-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
-	margin-bottom: 32px;
-	flex-wrap: wrap;
-	gap: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .dashboard-header h1 {
-	margin: 0 0 8px 0;
-	font-size: 28px;
-	font-weight: 700;
-	color: #111827;
+  margin: 0 0 8px 0;
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
 }
 
 .dashboard-header p {
-	margin: 0;
-	font-size: 15px;
-	color: #6b7280;
+  margin: 0;
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
 }
 
-.dashboard-content-grid{
-	display: grid;
-	grid-template-columns: 1fr 2fr;
-	gap: 24px;
-	margin-bottom: 32px;
+/* ── CONTENT GRID ───────────────────────────────────– */
+
+.dashboard-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 24px;
+  margin-bottom: 32px;
 }
+
+
+/* ── USER INFO CARD ─────────────────────────────────– */
 
 .userinfo-card {
-	background-color: #ffffff;
-	border-radius: 8px;
-	border: 1px solid #547980;
-	padding: 24px;
-	box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-	height: fit-content;
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-md);
+  border: 1px solid #547980;
+  padding: 24px;
+  box-shadow: var(--shadow-2xl);
+  height: fit-content;
 }
 
 .card-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 20px;
-	padding-bottom: 12px;
-	border-bottom: 1px solid #f3f4f6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border-primary);
 }
 
 .card-header h2 {
-	font-size: 18px;
-	font-weight: 600;
-	margin: 0;
-	color: #111827;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  margin: 0;
+  color: var(--color-text-primary);
 }
 
 .add-topic-btn {
-	background-color: #2563eb;
-	color: #ffffff;
-	border: none;
-	padding: 8px 16px;
-	border-radius: 6px;
-	font-size: 14px;
-	font-weight: 600;
-	cursor: pointer;
-	transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  background-color: var(--color-info);
+  color: var(--color-text-inverse);
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: background-color var(--transition-normal), transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .add-topic-btn:hover {
-	background-color: #1d4ed8;
-	box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+  background-color: #1d4ed8;
+  box-shadow: var(--shadow-lg);
 }
 
+/* ── TOPICS CARD ────────────────────────────────────– */
+
 .topics-card {
-	width: 65%;
-	background-color: #ffffff;
-	border-radius: 8px;
-	border: 1px solid #e5e7eb;
-	padding: 24px;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  width: 65%;
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-primary);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
 }
 
 .dashboard-topic-grid {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .dashboard-topic-card {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-	background-color: #668284;
-	border-radius: 8px;
-	padding: 16px;
-	transition: background-color 0.2s;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #668284;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  transition: background-color var(--transition-normal);
 }
 
 .dashboard-topic-card:hover {
-	background-color: #031634;
+  background-color: #031634;
 }
 
 .dashboard-topic-card h3 {
-	font-size: 20px;
-	font-weight: 600;
-	color: #ffffff;
-	margin: 0 0 16px 0;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-inverse);
+  margin: 0 0 16px 0;
 }
 
 .dashboard-topic-card h4 {
-	font-size: 14px;
-	font-weight: 400;
-	color: #ffffff;
-	margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-inverse);
+  margin: 0;
 }
 
 .dashboard-topic-card button {
-	color: #ffffff;
-	background-color: transparent;
-	border: none;
-	padding: 0;
-	cursor: pointer;
-	font-size: 14px;
-	font-weight: 600;
+  color: var(--color-text-inverse);
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
 }
 
 .dashboard-topic-card button:hover {
-	color: #F38630;
-	text-decoration: underline;
+  color: #F38630;
+  text-decoration: underline;
 }
 
-/* User Info */
+/* ── USER INFO BODY ────────────────────────────────– */
+
 .user-info-body {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .info-row {
@@ -167,81 +182,257 @@
 	color: #111827;
 }
 
-/* Spinner (used in App.tsx loading state) */
-.loading-center {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 200px;
+/* ── DASHBOARD GRIDS ────────────────────────────────– */
+
+/* Admin Project Details on Dashboard */
+.admin-dashboard-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 24px;
 }
 
-.spinner {
-	width: 20px;
-	height: 20px;
-	border: 2px solid rgba(37, 99, 235, 0.2);
-	border-top-color: #2563eb;
-	border-radius: 50%;
-	animation: spin 0.8s linear infinite;
-}
-
-.spinner-lg {
-	width: 40px;
-	height: 40px;
-}
-
-@keyframes spin {
-	to {
-		transform: rotate(360deg);
-	}
-}
-
-/* Skeleton loading cards (used in DashboardPage and TopicList) */
-.skeleton-grid {
-	display: flex;
+.dashboard-projects-info,
+.dashboard-user-list,
+.dashboard-topic-list,
+.dashboard-testimonial-list {
+  display: flex;
 	flex-direction: column;
-	gap: 16px;
-	padding: 48px;
+	justify-content: center;
+	align-items: flex-start;
+  gap: 12px;
+  padding: 16px 24px;
+  background: #E5FCC2;
+  border: 1px solid #e5e7eb;
+  border-left: 4px solid #BD1550;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+	max-height: 160px;
 }
 
-.skeleton-card {
-	background-color: #f3f4f6;
-	padding: 20px;
-	border-radius: 8px;
+.btn-admin {
+	color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
+	box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+	border: 1px solid #003049;
 }
 
-.skeleton-line {
-	height: 60px;
-	background-color: #e5e7eb;
-	border-radius: 4px;
-	animation: pulse 1.5s infinite;
+.add-project-btn {
+  background-color: #9a031e;
 }
 
-@keyframes pulse {
-	0%   { opacity: 1; }
-	50%  { opacity: 0.5; }
-	100% { opacity: 1; }
+.add-project-btn:hover {
+  background-color: #5f0f40;
 }
 
-/* Alert (used in DashboardPage error state and shared with other pages) */
-.alert {
-	padding: 10px 14px;
-	border-radius: 6px;
-	font-size: 14px;
-	margin-bottom: 20px;
+.add-task-btn {
+	background-color: #2563eb;
 }
 
-.alert-error {
-	background-color: #fef2f2;
-	border: 1px solid #fecaca;
-	color: #dc2626;
+.add-task-btn:hover {
+	background-color: #1d4ed8;
 }
 
-/* No-topics message (shared between DashboardPage and TopicList) */
-.no-topics {
-	text-align: center;
-	padding: 40px;
-	color: #6b7280;
+.user-list-btn {
+	background-color: #3a5a40;
 }
+
+.user-list-btn:hover {
+  background-color: #344e41;
+}
+
+.topic-list-btn {
+	background-color: #023e8a;
+}
+
+.topic-list-btn:hover {
+  background-color: #03045e;
+}
+
+.testimonial-list-btn {
+	background-color: #457b9d;
+}
+
+.testimonial-list-btn:hover {
+	background-color: #1d3557;
+}
+
+.projects-nav-info h2,
+.user-list-info h2,
+.topic-list-info h2,
+.testimonial-list-info h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+	line-height: 1;
+}
+
+.projects-nav-info p,
+.user-list-info p,
+.topic-list-info p,
+.testimonial-list-info p {
+  margin: 0;
+  font-size: 16px;
+  color: #6b7280;
+}
+
+/* --- User Dashboard Section --- */
+.user-dashboard-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #547980;
+  padding: 24px;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.user-projects-section h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #111827;
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 14px;
+}
+
+.user-project-card {
+  border: none;
+  padding-top: 16px;
+}
+
+.user-project-card h3 {
+  font-size: 18px;
+	font-weight: 700;
+  color: #C02942;
+  margin: 0 0 16px;
+}
+
+.user-project-card p {
+  color: #547980;
+  font-size: 16px;
+  margin: 0 0 16px;
+}
+
+.user-project-card p:last-child {
+  margin: 0;
+}
+
+.role-specific-info {
+  margin-bottom: 16px;
+}
+
+.role-specific-info:last-child {
+  margin-bottom: 0;
+}
+
+.role-specific-info h4 {
+	font-size: 16px;
+	font-weight: 700;
+  color: #033649;
+  margin: 0 0 16px;
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 8px;
+}
+
+.role-specific-info ul.assignees-list {
+  list-style-type: disc;
+  padding-left: 16px;
+  margin: 0;
+}
+
+.assignees-list li {
+  font-size: 16px;
+  color: #547980;
+  padding-bottom: 8px;
+}
+
+.assignees-list li:last-child {
+  padding-bottom: 0;
+}
+
+/* Project Slider Styling with Transitions */
+.project-slider-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.slider-viewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.slide-item {
+  flex: 0 0 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Controls Bar Flanking Buttons and Dots */
+.slider-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.slider-nav-btn {
+  background-color: #f3f4f6;
+  color: #033649;
+  border: 1px solid #033649;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.slider-nav-btn:hover {
+  background-color: #033649;
+  color: #ffffff;
+  border-color: #033649;
+}
+
+.slider-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #d1d5db;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.dot:hover {
+  background-color: #9ca3af;
+}
+
+.dot.active {
+  background-color: #BD1550;
+  transform: scale(1.2);
+}
+
+/* --- DASHBOARD PROJECT SECTION --- */
 
 h2.dashboard-project-section-title {
 	font-size: 20px;
@@ -258,7 +449,6 @@ h2.dashboard-project-section-title {
 	margin-bottom: 32px;
 }
 
-/* Project Tracker nav card */
 .dashboard-tasks-nav {
 	display: flex;
 	align-items: center;
@@ -287,25 +477,60 @@ h2.dashboard-project-section-title {
 	color: #6b7280;
 }
 
-/* ── Responsive ────────────────────────────────────── */
+/* ── TRENDING SECTION ───────────────────────────────– */
+
+.trending-section {
+  margin-top: 32px;
+}
+
+.trending-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0 0 16px;
+}
+
+.trending-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.trending-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+}
+
+.trending-item-name {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.trending-item-count {
+  background-color: var(--color-info);
+  color: var(--color-text-inverse);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ── RESPONSIVE ────────────────────────────────────– */
 
 @media (max-width: 1100px) {
-	.dashboard-container {
-		padding: 32px;
-	}
+  .dashboard-container,
+  .userdashboard-container {
+    padding: 32px;
+  }
 
-	.userinfo-topics-wrapper {
-		flex-direction: column;
-	}
-
-	.userinfo-card {
-		width: auto;
-		min-width: 375px;
-	}
-
-	.topics-card {
-		width: calc(100vw - 112px);
-	}
+  .dashboard-content-grid {
+    grid-template-columns: 1fr;
+  }
 
 	.project-task-wrapper {
 		flex-direction: column;
@@ -316,69 +541,110 @@ h2.dashboard-project-section-title {
 	.dashboard-tasks-nav {
 		width: unset;
 	}
+
+  .topics-card {
+    width: 100%;
+  }
+
+	.admin-dashboard-container {
+		grid-template-columns: auto;
+	}
+
+  .dashboard-projects-info,
+	.dashboard-user-list,
+	.dashboard-topic-list,
+	.dashboard-testimonial-list {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 @media (max-width: 768px) {
-	.dashboard-container {
-		padding: 24px;
+  .dashboard-container,
+  .userdashboard-container {
+    padding: 24px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-content-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+	.dashboard-tasks-nav {
+		gap: 12px;
+		padding: 16px;
 	}
 
-	.dashboard-header h1 {
-		font-size: 22px;
-	}
+  .userinfo-card {
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
 
-	.dashboard-content-grid {
-		grid-template-columns: auto;
-	}
+  /* Slider sizing and overflow prevention */
+  .project-slider-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .slider-viewport {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .slide-item {
+    flex: 0 0 100%;
+    min-width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-break: break-word; /* Prevents long emails/text from expanding card */
+  }
+
+  /* Wrap key-value pairs on narrow screens */
+  .user-project-card p {
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container,
+  .userdashboard-container {
+    padding: 20px;
+  }
+
+  .dashboard-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .dashboard-topic-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
 	.dashboard-tasks-nav {
 		flex-direction: column;
 		align-items: flex-start;
-		gap: 12px;
-		padding: 16px;
 	}
 
 	.dashboard-tasks-nav .add-topic-btn {
-		width: 100%;
 		text-align: center;
+		width: 100%;
 	}
 
-	.card-header {
-		flex-wrap: wrap;
-		gap: 8px;
-	}
-
-	.skeleton-grid {
-		padding: 24px;
-	}
-}
-
-@media (max-width: 480px) {
-	.dashboard-container {
-		padding: 24px;
-	}
-
-	.dashboard-header h1 {
-		font-size: 20px;
-	}
-
-	.userinfo-card,
-	.topics-card {
-		padding: 16px;
-		min-width: calc(100vw - 80px);
-	}
-
-	.dashboard-topic-card {
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 12px;
-	}
-
-	.dashboard-topic-card h3 {
-		font-size: 17px;
-	}
-
-	.skeleton-grid {
-		padding: 24px;
-	}
+	.dashboard-projects-info,
+	.dashboard-user-list,
+	.dashboard-topic-list,
+	.dashboard-testimonial-list {
+    padding: 16px;
+  }
 }

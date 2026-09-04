@@ -1,0 +1,423 @@
+/* ============================================================================
+	GLOBAL BASE STYLES
+	============================================================================
+	Global resets, typography, and html/body styles
+	All values in px
+	========================================================================== */
+
+/* ── RESET & NORMALIZE ─────────────────────────────– */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--color-bg-primary);
+  min-height: 100%;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1920px;
+  min-height: 100vh;
+  background-color: var(--color-bg-tertiary);
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.06);
+  font-family: var(--font-family);
+  font-size: 16px;
+  line-height: var(--line-height-loose);
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--color-text-secondary);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── APP LAYOUT ─────────────────────────────────────– */
+
+.app-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-content {
+  flex: 1;
+}
+
+/* ── TYPOGRAPHY ────────────────────────────────────– */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+}
+
+h1 {
+  font-size: var(--font-size-6xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}
+
+h2 {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
+}
+
+h3 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+}
+
+h4 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+h5 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+h6 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+}
+
+p {
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+a {
+  color: var(--color-info);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* ── LISTS ─────────────────────────────────────────– */
+
+ul,
+ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 0;
+}
+
+/* ── BLOCKQUOTE ────────────────────────────────────– */
+
+blockquote {
+  margin: 0;
+  padding: 16px;
+  border-left: 4px solid var(--color-info);
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+}
+
+/* ── CODE ───────────────────────────────────────────– */
+
+code,
+pre {
+  font-family: 'Courier New', monospace;
+  background-color: var(--color-bg-secondary);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+}
+
+pre {
+  padding: 12px;
+  overflow-x: auto;
+}
+
+/* ── IMAGES ────────────────────────────────────────– */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── TABLES ────────────────────────────────────────– */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+th {
+  background-color: var(--color-bg-secondary);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+/* ── FORMS ────────────────────────────────────────– */
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+/* ── SCROLLBAR STYLING ────────────────────────────– */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-secondary);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-primary);
+}
+
+/* ── UTILITY CLASSES ────────────────────────────────– */
+
+/* Text Utilities */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-muted {
+  color: var(--color-text-light);
+}
+
+.text-white {
+  color: var(--color-text-inverse);
+}
+
+.font-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.font-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.font-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+/* Background Utilities */
+.bg-primary {
+  background-color: var(--color-bg-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-bg-secondary);
+}
+
+.bg-tertiary {
+  background-color: var(--color-bg-tertiary);
+}
+
+/* Display Utilities */
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+/* Border Utilities */
+.border {
+  border: 1px solid var(--color-border-primary);
+}
+
+.border-top {
+  border-top: 1px solid var(--color-border-primary);
+}
+
+.border-bottom {
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+/* Rounded Utilities */
+.rounded {
+  border-radius: var(--radius-md);
+}
+
+.rounded-sm {
+  border-radius: var(--radius-sm);
+}
+
+.rounded-lg {
+  border-radius: var(--radius-lg);
+}
+
+.rounded-full {
+  border-radius: var(--radius-full);
+}
+
+/* Shadow Utilities */
+.shadow {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── HOME PAGE STYLES ───────────────────────────────– */
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-7xl);
+}
+
+.home-page-title {
+  font-size: var(--font-size-6xl);
+  color: var(--color-primary);
+  text-align: center;
+  line-height: var(--line-height-tight);
+  margin-top: 0;
+  margin-bottom: var(--spacing-5xl);
+	font-weight: 800;
+}
+
+/* ── RESPONSIVE ────────────────────────────────────– */
+
+@media (max-width: 1100px) {
+  body {
+    max-width: 100%;
+  }
+
+	.home-page-title {
+		font-size: var(--font-size-5xl);
+	}
+}
+
+@media (max-width: 768px) {
+  .home-page {
+    padding: var(--spacing-4xl);
+  }
+
+  .home-page-title {
+    font-size: var(--font-size-4xl);
+		margin-bottom: var(--spacing-4xl);
+  }
+
+  h1 {
+    font-size: var(--font-size-4xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-3xl);
+  }
+
+  h3 {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page {
+    padding: var(--spacing-3xl);
+  }
+
+  .home-page-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  h3 {
+    font-size: var(--font-size-xl);
+  }
+}

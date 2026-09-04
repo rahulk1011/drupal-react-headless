@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-import { getTasks } from "../api/client";
-import "../css/tasklist.css";
+import { useAuth } from "../../hooks/useAuth";
+import { getTasks } from "../../api/client";
+import "../../css/index.css";
 
 const COLUMNS = [
   { key: "open", label: "Open" },
@@ -155,7 +155,7 @@ export default function TaskList() {
         </div>
         {!isClient && (
           <button
-            className="add-task-btn"
+            className="btn-admin add-task-btn"
             onClick={() => navigate("/create-task")}
           >
             + Add Task

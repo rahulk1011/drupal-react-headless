@@ -1,6 +1,6 @@
-import TopicList from "../components/TopicList";
-import ClientList from "../components/ClientList";
-import Testimonials from "../components/Testimonials";
+import TopicList from "../components/topics/TopicList";
+import ClientList from "../components/common/ClientList";
+import Testimonials from "../components/common/Testimonials";
 import { useTranslation } from "react-i18next";
 
 export default function HomePage() {

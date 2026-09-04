@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { addTask, getUsers, getClientList, getProjectDetails } from "../api/client";
-import "../css/tasklist.css";
+import { addTask, getUsers, getClientList, getProjectDetails } from "../../api/client";
+import "../../css/index.css";
 import { useTranslation } from "react-i18next";
 
 export default function CreateTask() {
@@ -190,8 +190,8 @@ export default function CreateTask() {
           {/* Due Date / Severity / Status - grouped together since they're
               all short, single-value fields that together describe the
               task's schedule and priority. */}
-          <div className="form-row form-row--3col">
-            <div className="form-group">
+          <div className="form-group form-row--3col">
+            <div>
               <label htmlFor="due_date">
                 {t("task.dueDate")} <span className="required">*</span>
               </label>
@@ -206,7 +206,7 @@ export default function CreateTask() {
               />
             </div>
 
-            <div className="form-group">
+            <div>
               <label htmlFor="severity">
                 {t("common.severity")} <span className="required">*</span>
               </label>
@@ -225,7 +225,7 @@ export default function CreateTask() {
               </select>
             </div>
 
-            <div className="form-group">
+            <div>
               <label htmlFor="status">
                 {t("common.status")} <span className="required">*</span>
               </label>
@@ -247,6 +247,13 @@ export default function CreateTask() {
 
           {/* Form Actions */}
           <div className="form-actions">
+						<button
+              type="submit"
+              className="btn-primary"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? t("saving") : t("task.saveTask")}
+            </button>
             <button
               type="button"
               className="btn-secondary"
@@ -254,13 +261,6 @@ export default function CreateTask() {
               disabled={isSubmitting}
             >
               {t("common.cancel")}
-            </button>
-            <button
-              type="submit"
-              className="btn-primary"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? t("saving") : t("task.saveTask")}
             </button>
           </div>
         </form>

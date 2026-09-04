@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-import { getUsers } from "../api/client";
-import "../css/userlist.css";
+import { useAuth } from "../../hooks/useAuth";
+import { getUsers } from "../../api/client";
+import "../../css/index.css";
 
 export default function UserList() {
   const [users, setUsers] = useState([]);
@@ -101,7 +101,7 @@ export default function UserList() {
       </div>
 
       <div className="userlist-header">
-        <div>
+        <div className="userlist-text-wrapper">
           <h1 className="userlist-title">User List</h1>
           <p className="userlist-count">
             Showing {filteredAndSortedUsers.length} of {users.length} users

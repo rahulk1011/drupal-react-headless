@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { getTopics } from "../api/client";
-import "../css/trendingtopics.css";
+import { getTopics } from "../../api/client";
+import "../../css/index.css";
 import { useTranslation } from "react-i18next";
 
 // Helper to strip HTML tags safely

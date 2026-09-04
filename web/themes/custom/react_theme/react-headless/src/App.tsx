@@ -2,20 +2,20 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./hooks/useAuth";
 import type { ReactNode } from "react";
 
-import TopBar from "./components/TopBar";
-import Footer from "./components/Footer";
+import TopBar from "./components/layout/TopBar";
+import Footer from "./components/layout/Footer";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
-import TaskList from "./components/TaskList";
-import CreateTask from "./components/CreateTask";
-import EditTask from "./components/EditTask";
-import AddTopic from "./components/AddTopic";
-import ProjectList from "./components/ProjectList";
-import AddProject from "./components/AddProject";
-import UserList from "./components/UserList";
-import AddTestimonial from "./components/AddTestimonial";
+import TaskList from "./components/tasks/TaskList";
+import CreateTask from "./components/tasks/CreateTask";
+import EditTask from "./components/tasks/EditTask";
+import AddTopic from "./components/topics/AddTopic";
+import ProjectList from "./components/common/ProjectList";
+import AddProject from "./components/common/AddProject";
+import UserList from "./components/common/UserList";
+import AddTestimonial from "./components/common/AddTestimonial";
 
 type RouteProps = {
 	children: ReactNode;

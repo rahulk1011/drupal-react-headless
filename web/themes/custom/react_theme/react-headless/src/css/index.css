@@ -1,93 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap');
+/* ============================================================================
+	CONSOLIDATED CSS - MASTER INDEX
+	============================================================================
+	All CSS organized into focused, reusable modules
+	Consolidated from 14 original CSS files into 7 organized files
+	All values in px units
+	
+	File Organization:
+	1. variables.css - Design tokens & CSS variables
+	2. base.css - Global resets, typography, utilities
+	3. auth.css - Login & Register pages
+	4. lists.css - Data lists & tables (tasks, users, clients, etc.)
+	5. dashboard.css - Dashboard pages
+	6. components.css - Global components (topbar, footer, testimonials, trending)
+	========================================================================== */
 
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #eef4fb;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-  --font-family: "Exo", sans-serif;
+/* ── DESIGN TOKENS ─────────────────────────────────– */
+@import url('./variables.css');
 
-  /* Base font is now 16px so 1rem = 16px everywhere */
-  font: 16px/1.45 var(--font-family);
-  letter-spacing: 0.18px;
-  color-scheme: light;
-  color: var(--text);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/* ── GLOBAL BASE STYLES ────────────────────────────– */
+@import url('./base.css');
 
-html {
-  background-color: #FFF;
-  min-height: 100%;
-}
+/* ── AUTHENTICATION PAGES ──────────────────────────– */
+@import url('./auth.css');
 
-body {
-  margin: 0 auto;
-  padding: 0;
-  max-width: 1920px;
-  min-height: 100vh;
-  background-color: #eef4fb;
-  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.06);
-}
+/* ── DATA LISTS & TABLES ───────────────────────────– */
+@import url('./lists.css');
 
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+/* ── DASHBOARD PAGES ───────────────────────────────– */
+@import url('./dashboard.css');
 
-.app-layout {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.app-content {
-  flex: 1;
-}
-
-.home-page {
-  display: flex;
-  flex-direction: column;
-  padding: 48px;
-}
-
-.home-page-title {
-  font-size: 48px;
-  color: #0B2E59;
-  text-align: center;
-  line-height: 1;
-  margin-top: 0;
-  margin-bottom: 8px;
-}
-
-/* ── Responsive ────────────────────────────────────── */
-
-@media (max-width: 768px) {
-  .home-page {
-    padding: 24px;
-  }
-
-  .home-page-title {
-    font-size: 36px;
-  }
-}
-
-@media (max-width: 480px) {
-  .home-page {
-    padding: 24px;
-  }
-
-  .home-page-title {
-    font-size: 28px;
-  }
-}
+/* ── GLOBAL COMPONENTS ────────────────────────────– */
+@import url('./components.css');

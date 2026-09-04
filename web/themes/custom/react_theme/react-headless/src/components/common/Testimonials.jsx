@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getTestimonials } from "../api/client";
-import "../css/testimonials.css";
+import { getTestimonials } from "../../api/client";
+import "../../css/index.css";
 
 const stripHtml = (html) => {
   if (typeof window === "undefined") return html.replace(/<[^>]*>?/gm, "");

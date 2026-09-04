@@ -1,22 +1,18 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { addTopic } from "../api/client";
-import "../css/tasklist.css";
+import { addTestimonial } from "../../api/client";
+import "../../css/index.css";
 import { useTranslation } from "react-i18next";
 
-export default function AddTopic() {
-  const { t, i18n } = useTranslation();
+export default function AddTestimonial() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const currentLang = i18n.language?.split("-")[0] || "en";
-
   const [formData, setFormData] = useState({
     title: "",
-    subheading: "",
+		client_name: "",
     description: "",
-    trending: "no",
     image: null,
-    language: currentLang,
   });
 
   const handleInputChange = (e) => {
@@ -44,31 +40,29 @@ export default function AddTopic() {
       const base64Image = await fileToBase64(formData.image);
       const payload = {
         title: formData.title.trim(),
-        subheading: formData.subheading.trim(),
+				client_name: formData.client_name.trim(),
         description: formData.description.trim(),
-        trending: formData.trending,
-        language: formData.language,
         image: base64Image,
         image_name: formData.image.name,
       };
 
-      await addTopic(payload);
+      await addTestimonial(payload);
       navigate("/dashboard");
     } catch (err) {
-      console.error("Failed to create topic:", err);
-      alert(err.message || "Failed to save topic. Please try again.");
+      console.error("Failed to create testimonial:", err);
+      alert(err.message || "Failed to save testimonial. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="create-task-container">
-      <div className="create-task-card">
-        <div className="create-task-header">
+    <div className="add-testimonial-container">
+      <div className="add-testimonial-card">
+        <div className="add-testimonial-header">
           <div>
-            <h2>{t("topic.addNewTopic")}</h2>
-            <p className="create-task-subtitle">
+            <h2>{t("testimonial.addTestimonial")}</h2>
+            <p className="add-testimonial-subtitle">
               <span className="required">*</span> {t("common.requiredFields")}
             </p>
           </div>
@@ -81,7 +75,7 @@ export default function AddTopic() {
             <span aria-hidden="true">&larr;</span> {t("common.backToDashboard")}
           </button>
         </div>
-
+        
         <form onSubmit={handleSubmit} className="task-form">
           {/* Title */}
           <div className="form-group">
@@ -95,24 +89,24 @@ export default function AddTopic() {
               value={formData.title}
               onChange={handleInputChange}
               required
-              placeholder={t("topic.enterTitle")}
+              placeholder={t("testimonial.enterTestimonial")}
               disabled={isSubmitting}
             />
           </div>
 
-          {/* Sub Heading */}
+					{/* Client name */}
           <div className="form-group">
-            <label htmlFor="subheading">
-              {t("topic.subHeading")} <span className="required">*</span>
+            <label htmlFor="client_name">
+              Client Name <span className="required">*</span>
             </label>
             <input
               type="text"
-              id="subheading"
-              name="subheading"
-              value={formData.subheading}
+              id="client_name"
+              name="client_name"
+              value={formData.client_name}
               onChange={handleInputChange}
               required
-              placeholder={t("topic.enterSubHeading")}
+              placeholder="Enter client name"
               disabled={isSubmitting}
             />
           </div>
@@ -155,45 +149,15 @@ export default function AddTopic() {
             />
           </div>
 
-          {/* Trending & Language */}
-          <div className="form-group form-group-inline">
-            <div>
-              <label htmlFor="trending">
-                {t("topic.trending")} <span className="required">*</span>
-              </label>
-              <select
-                id="trending"
-                name="trending"
-                value={formData.trending}
-                onChange={handleInputChange}
-                required
-                disabled={isSubmitting}
-              >
-                <option value="yes">{t("topic.yes")}</option>
-                <option value="no">{t("topic.no")}</option>
-              </select>
-            </div>
-
-            <div>
-              <label htmlFor="language">
-                {t("topic.language")} <span className="required">*</span>
-              </label>
-              <select
-                id="language"
-                name="language"
-                value={formData.language}
-                onChange={handleInputChange}
-                required
-                disabled={isSubmitting}
-              >
-                <option value="en">English</option>
-                <option value="de">German</option>
-              </select>
-            </div>
-          </div>
-
           {/* Form Actions */}
           <div className="form-actions">
+						<button
+              type="submit"
+              className="btn-primary"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? t("common.saving") : t("testimonial.saveTestimonial")}
+            </button>
             <button
               type="button"
               className="btn-secondary"
@@ -201,13 +165,6 @@ export default function AddTopic() {
               disabled={isSubmitting}
             >
               {t("common.cancel")}
-            </button>
-            <button
-              type="submit"
-              className="btn-primary"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? t("common.saving") : t("topic.saveTopic")}
             </button>
           </div>
         </form>

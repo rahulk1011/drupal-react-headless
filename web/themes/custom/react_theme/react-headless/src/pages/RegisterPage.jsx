@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { registerUser } from "../api/client";
-import "../css/register.css";
+import "../css/index.css";
 import { useTranslation } from "react-i18next";
 
 export default function RegisterPage() {
@@ -263,7 +263,7 @@ export default function RegisterPage() {
 
         {/* Footer */}
         <div className="auth-footer">
-          <span>{t("authentication.alreadyHaveAccount")}</span>
+          <span>{t("authentication.alreadyHaveAccount")}</span> {' '}
           <Link to="/login" className="auth-link">
             {t("authentication.login")}
           </Link>

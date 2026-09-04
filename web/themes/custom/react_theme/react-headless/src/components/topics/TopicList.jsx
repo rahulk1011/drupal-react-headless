@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { getTopics } from "../api/client";
+import { getTopics } from "../../api/client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import "../css/topiclist.css";
+import "../../css/index.css";
 import { useTranslation } from "react-i18next";
 
 // Helper to strip HTML tags for accurate character counting

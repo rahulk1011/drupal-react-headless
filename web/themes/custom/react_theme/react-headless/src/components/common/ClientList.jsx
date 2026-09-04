@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getClientList } from "../api/client";
-import "../css/clientlist.css";
+import { getClientList } from "../../api/client";
+import "../../css/index.css";
 
 export default function ClientList() {
   const [clients, setClients] = useState([]);

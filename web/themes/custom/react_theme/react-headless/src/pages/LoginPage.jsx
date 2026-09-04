@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import "../css/login.css";
+import "../css/index.css";
 import { useTranslation } from "react-i18next";
 
 export default function LoginPage() {

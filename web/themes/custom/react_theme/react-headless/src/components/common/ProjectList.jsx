@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-import { getProjectDetails } from "../api/client";
-import "../css/projectlist.css";
+import { useAuth } from "../../hooks/useAuth";
+import { getProjectDetails } from "../../api/client";
+import "../../css/index.css";
 
 export default function ProjectList() {
   const [projects, setProjects] = useState([]);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-import { getTaskById, updateTask } from "../api/client";
-import "../css/tasklist.css";
+import { getTaskById, updateTask } from "../../api/client";
+import "../../css/index.css";
 
 export default function EditTask() {
   const navigate = useNavigate();
@@ -129,13 +129,13 @@ export default function EditTask() {
             <h2>Edit Task</h2>
             <p className="create-task-subtitle">
               Fields marked <span className="required">*</span> are required.
-              {assignedTo?.name && (
-                <>
-                  {" "}
-                  Assigned to <strong>{assignedTo.name}</strong>.
-                </>
-              )}
             </p>
+						{assignedTo?.name && (
+							<p className="edit-task-assigned-to">
+								{" "}
+								Task is assigned to <strong>{assignedTo.fullname}</strong>.
+							</p>
+						)}
           </div>
           <button
             type="button"
@@ -245,6 +245,13 @@ export default function EditTask() {
 
           {/* Form Actions */}
           <div className="form-actions">
+						<button
+              type="submit"
+              className="btn-primary"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Saving..." : "Save Changes"}
+            </button>
             <button
               type="button"
               className="btn-secondary"
@@ -252,13 +259,6 @@ export default function EditTask() {
               disabled={isSubmitting}
             >
               Cancel
-            </button>
-            <button
-              type="submit"
-              className="btn-primary"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Saving..." : "Save Changes"}
             </button>
           </div>
         </form>

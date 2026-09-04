@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { addProject, getUsers } from "../api/client";
-import "../css/projectlist.css";
+import { addProject, getUsers } from "../../api/client";
+import "../../css/index.css";
 import { useTranslation } from "react-i18next";
 
 export default function AddProject() {
@@ -73,11 +73,11 @@ export default function AddProject() {
 
   return (
     <div className="add-project-container">
-      <div className="add-project-card">
-        <div className="add-project-header">
+      <div className="create-task-card">
+        <div className="create-task-header">
           <div>
             <h2 className="add-project-title">Add New Project</h2>
-            <p className="add-project-subtitle">
+            <p className="create-task-subtitle">
               <span className="required">*</span> {t("common.requiredFields")}
             </p>
           </div>
@@ -91,7 +91,7 @@ export default function AddProject() {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="project-form">
+        <form onSubmit={handleSubmit} className="task-form">
           {/* Project Name */}
           <div className="form-group">
             <label htmlFor="projectName">
@@ -172,9 +172,9 @@ export default function AddProject() {
             />
           </div>
 
-          <div className="form-row">
+          <div className="form-group form-group-inline">
             {/* Start Date */}
-            <div className="form-group">
+            <div>
               <label htmlFor="startDate">
                 Start Date <span className="required">*</span>
               </label>
@@ -190,7 +190,7 @@ export default function AddProject() {
             </div>
 
             {/* End Date */}
-            <div className="form-group">
+            <div>
               <label htmlFor="endDate">
                 End Date <span className="required">*</span>
               </label>
@@ -265,9 +265,9 @@ export default function AddProject() {
             />
           </div>
 
-          <div className="form-row">
+          <div className="form-group form-group-inline">
             {/* Client City */}
-            <div className="form-group">
+            <div>
               <label htmlFor="clientCity">
                 Client City <span className="required">*</span>
               </label>
@@ -284,7 +284,7 @@ export default function AddProject() {
             </div>
 
             {/* Client Country */}
-            <div className="form-group">
+            <div>
               <label htmlFor="clientCountry">
                 Client Country <span className="required">*</span>
               </label>
@@ -322,7 +322,7 @@ export default function AddProject() {
           <div className="form-actions">
             <button
               type="submit"
-              className="btn-primary-project"
+              className="btn-primary"
               disabled={isSubmitting}
             >
               {isSubmitting ? t("saving") : "Add Project"}
