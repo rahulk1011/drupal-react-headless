@@ -7,7 +7,7 @@
 .app-topbar {
   width: 100%;
   background-color: #0f2d5e;
-  border-bottom: 1px solid #1a3d78;
+  border-bottom: 2px solid var(--color-accent-border);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -257,7 +257,7 @@
 	margin-top: auto;
 	background-color: #0f172a;
 	color: #94a3b8;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	border-top: 2px solid var(--color-primary-hover);
 }
 
 .app-footer__inner {
@@ -360,12 +360,10 @@
 .topic-list-container {
 	max-width: 100%;
 	margin: 0 auto 48px;
-	font-family: var(--font-family);
 	box-sizing: border-box;
 }
 
 .topic-list-heading {
-	font-weight: 700;
 	margin-top: 0;
 	margin-bottom: 16px;
 	color: #91204D;
@@ -455,7 +453,7 @@
 	font-size: 20px;
 	font-weight: 700;
 	color: #031634;
-	margin: 0 0 4px 0;
+	margin: 0 0 8px 0;
 }
 
 /* Trending card — amber/gold colour scheme */
@@ -502,7 +500,7 @@
 }
 
 .topic-subheading {
-	font-size: 15px;
+	font-size: 16px;
 	font-weight: 600;
 	color: #033649;
 	margin: 0 0 12px 0;
@@ -543,7 +541,6 @@
 
 .read-more-btn:hover {
 	color: #1d4ed8;
-	text-decoration: underline;
 }
 
 /* Modal Styling */

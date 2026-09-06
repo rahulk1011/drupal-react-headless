@@ -57,12 +57,12 @@ export default function AddTestimonial() {
   };
 
   return (
-    <div className="add-testimonial-container">
-      <div className="add-testimonial-card">
-        <div className="add-testimonial-header">
+    <div className="form-card-wrapper">
+      <div className="form-card">
+        <div className="form-header">
           <div>
             <h2>{t("testimonial.addTestimonial")}</h2>
-            <p className="add-testimonial-subtitle">
+            <p className="form-subtitle">
               <span className="required">*</span> {t("common.requiredFields")}
             </p>
           </div>

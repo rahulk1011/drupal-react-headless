@@ -66,8 +66,8 @@ export default function ProjectList() {
   }
 
   return (
-    <div className="projectlist-container">
-      <div className="projectlist-breadcrumb">
+    <>
+      <div className="breadcrumb">
         <button
           type="button"
           className="back-to-dashboard-link"
@@ -76,12 +76,12 @@ export default function ProjectList() {
           ← Dashboard
         </button>
         <span className="breadcrumb-sep">/</span>
-        <span>Project List</span>
+        <span className="breadcrumb-location">Project List</span>
       </div>
-
-      <div className="projectlist-header">
+    <div className="form-card-wrapper">
+      <div className="form-header">
         <div>
-          <h1 className="projectlist-title">Project List</h1>
+          <h1 className="form-title">Project List</h1>
           <p className="project-count">
             View all available projects: {projects.length}
           </p>
@@ -249,5 +249,6 @@ export default function ProjectList() {
         </div>
       )}
     </div>
+    </>
   );
 }

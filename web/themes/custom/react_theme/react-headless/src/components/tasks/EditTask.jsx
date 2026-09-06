@@ -94,8 +94,8 @@ export default function EditTask() {
 
   if (isLoading) {
     return (
-      <div className="create-task-container">
-        <div className="create-task-card">
+      <div className="form-card-wrapper">
+        <div className="form-card">
           <p className="tasklist-loading">Loading task...</p>
         </div>
       </div>
@@ -104,8 +104,8 @@ export default function EditTask() {
 
   if (loadError) {
     return (
-      <div className="create-task-container">
-        <div className="create-task-card">
+      <div className="form-card-wrapper">
+        <div className="form-card">
           <div className="tasklist-error">{loadError}</div>
           <div className="form-actions">
             <button
@@ -122,12 +122,12 @@ export default function EditTask() {
   }
 
   return (
-    <div className="create-task-container">
-      <div className="create-task-card">
-        <div className="create-task-header">
+    <div className="form-card-wrapper">
+      <div className="form-card">
+        <div className="form-header">
           <div>
             <h2>Edit Task</h2>
-            <p className="create-task-subtitle">
+            <p className="form-subtitle">
               Fields marked <span className="required">*</span> are required.
             </p>
 						{assignedTo?.name && (

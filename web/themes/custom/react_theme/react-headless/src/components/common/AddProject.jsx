@@ -72,12 +72,12 @@ export default function AddProject() {
   };
 
   return (
-    <div className="add-project-container">
-      <div className="create-task-card">
-        <div className="create-task-header">
+    <div className="form-card-wrapper">
+      <div className="form-card">
+        <div className="form-header">
           <div>
-            <h2 className="add-project-title">Add New Project</h2>
-            <p className="create-task-subtitle">
+            <h2 className="form-title">Add New Project</h2>
+            <p className="form-subtitle">
               <span className="required">*</span> {t("common.requiredFields")}
             </p>
           </div>
