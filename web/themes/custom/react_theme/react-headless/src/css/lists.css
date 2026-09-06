@@ -5,17 +5,11 @@ DATA LISTS & TABLES
 /* ── CONTAINER & LAYOUT ─────────────────────────────– */
 
 .tasklist-container,
-.clientlist-container,
-.projectlist-container,
-.topiclist-container,
-.user-list-container,
-.create-task-container,
-.add-testimonial-container,
-.add-project-container {
+.form-card-wrapper {
   max-width: 1920px;
   margin: 0 auto;
   padding: 32px 48px;
-  font-family: var(--font-family-fallback);
+  font-family: var(--font-family);
 }
 
 /* ── SCOPE & BREADCRUMB ─────────────────────────────– */
@@ -27,36 +21,39 @@ DATA LISTS & TABLES
   color: var(--color-text-secondary);
 }
 
-.projectlist-breadcrumb,
-.tasklist-breadcrumb,
-.userlist-breadcrumb,
-.list-breadcrumb {
+.breadcrumb {
+  background: #031634;
+  padding: 12px 48px;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: var(--font-size-sm);
+  gap: 8px;
   color: var(--color-text-secondary);
-  margin-bottom: 16px;
 }
 
 .breadcrumb-sep {
-  color: var(--color-border-secondary);
+  color: var(--color-accent-border);
+}
+
+.breadcrumb-location {
+  color: var(--color-accent-border);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-tight);
 }
 
 .back-to-dashboard-link {
   background: none;
   border: none;
   padding: 0;
-  font-size: var(--font-size-sm);
-  color: var(--color-info);
+  color: var(--color-primary-light);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-tight);
   cursor: pointer;
   font-family: inherit;
   transition: color var(--transition-fast);
 }
 
 .back-to-dashboard-link:hover {
-  color: #1d4ed8;
-  text-decoration: underline;
+  color: var(--color-primary-hover);
 }
 
 /* ── LIST HEADER ────────────────────────────────────– */
@@ -71,7 +68,7 @@ DATA LISTS & TABLES
 
 .tasklist-header,
 .userlist-header,
-.create-task-header,
+.form-header,
 .list-header,
 .add-testimonial-header {
   display: flex;
@@ -85,8 +82,7 @@ DATA LISTS & TABLES
 
 .projectlist-header h1,
 .tasklist-header h2,
-.userlist-header h1,
-.create-task-header h2,
+.form-header h2,
 .list-header h2,
 .add-testimonial-header h2 {
   margin: 0;
@@ -720,12 +716,12 @@ DATA LISTS & TABLES
 /* ── RESPONSIVE ────────────────────────────────────– */
 
 @media (max-width: 1100px) {
+  .breadcrumb {
+    padding: 12px 32px;
+  }
+
   .tasklist-container,
-  .user-list-container,
-  .projectlist-container,
-  .create-task-container,
-	.add-testimonial-container,
-	.add-project-container {
+	.form-card-wrapper {
     padding: 24px 32px;
   }
 
@@ -747,11 +743,7 @@ DATA LISTS & TABLES
 
 @media (max-width: 768px) {
   .tasklist-container,
-  .user-list-container,
-  .projectlist-container,
-  .create-task-container,
-	.add-testimonial-container,
-	.add-project-container {
+	.form-card-wrapper {
     padding: 24px;
   }
 
@@ -800,12 +792,12 @@ DATA LISTS & TABLES
 }
 
 @media (max-width: 480px) {
+  .breadcrumb {
+    padding: 12px 24px;
+  }
+
   .tasklist-container,
-  .user-list-container,
-  .projectlist-container,
-  .create-task-container,
-	.add-testimonial-container,
-	.add-project-container {
+	.form-card-wrapper {
     padding: 20px 24px;
   }
 

@@ -87,8 +87,8 @@ export default function UserList() {
   }
 
   return (
-    <div className="user-list-container">
-      <div className="userlist-breadcrumb">
+    <>
+      <div className="breadcrumb">
         <button
           type="button"
           className="back-to-dashboard-link"
@@ -97,114 +97,115 @@ export default function UserList() {
           ← Dashboard
         </button>
         <span className="breadcrumb-sep">/</span>
-        <span>User List</span>
+        <span className="breadcrumb-location">User List</span>
       </div>
-
-      <div className="userlist-header">
-        <div className="userlist-text-wrapper">
-          <h1 className="userlist-title">User List</h1>
-          <p className="userlist-count">
-            Showing {filteredAndSortedUsers.length} of {users.length} users
-          </p>
-        </div>
-
-        <div className="userlist-controls">
-          <div className="userlist-search">
-            <input
-              type="text"
-              className="search-input"
-              placeholder="Search by name or email..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
+      <div className="form-card-wrapper">
+        <div className="userlist-header">
+          <div className="userlist-text-wrapper">
+            <h1 className="userlist-title">User List</h1>
+            <p className="userlist-count">
+              Showing {filteredAndSortedUsers.length} of {users.length} users
+            </p>
           </div>
 
-          <div className="userlist-filter">
-            <label htmlFor="role-select" className="filter-label">
-              Filter Role:
-            </label>
-            <select
-              id="role-select"
-              className="role-dropdown"
-              value={selectedRole}
-              onChange={handleRoleChange}
-            >
-              <option value="ALL">All Roles</option>
-              {roles.map((role) => (
-                <option key={role} value={role}>
-                  {role}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div className="userlist-content">
-        <div className="userlist-row userlist-header-row">
-          <strong className="col-uid">UID</strong>
-          <strong className="col-fullname">Full Name</strong>
-          <strong className="col-username">Username</strong>
-          <strong className="col-email">Email</strong>
-          <strong className="col-role">Role</strong>
-          <strong className="col-created">Created</strong>
-          <strong className="col-last-login">Last Login</strong>
-        </div>
-
-        {currentUsers.length === 0 ? (
-          <div className="no-users">No matching users found.</div>
-        ) : (
-          currentUsers.map((user) => (
-            <div
-              key={user.uid}
-              className={`userlist-row role-${user.role?.toLowerCase()}`}
-            >
-              <p className="col-uid">{user.uid}</p>
-              <p className="col-fullname">{user.fullname}</p>
-              <p className="col-username">{user.name}</p>
-              <p className="col-email">{user.email}</p>
-              <p className="col-role">{user.role}</p>
-              <p className="col-created">{user.created}</p>
-              <p className="col-last-login">{user.last_login}</p>
+          <div className="userlist-controls">
+            <div className="userlist-search">
+              <input
+                type="text"
+                className="search-input"
+                placeholder="Search by name or email..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
             </div>
-          ))
+
+            <div className="userlist-filter">
+              <label htmlFor="role-select" className="filter-label">
+                Filter Role:
+              </label>
+              <select
+                id="role-select"
+                className="role-dropdown"
+                value={selectedRole}
+                onChange={handleRoleChange}
+              >
+                <option value="ALL">All Roles</option>
+                {roles.map((role) => (
+                  <option key={role} value={role}>
+                    {role}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div className="userlist-content">
+          <div className="userlist-row userlist-header-row">
+            <strong className="col-uid">UID</strong>
+            <strong className="col-fullname">Full Name</strong>
+            <strong className="col-username">Username</strong>
+            <strong className="col-email">Email</strong>
+            <strong className="col-role">Role</strong>
+            <strong className="col-created">Created</strong>
+            <strong className="col-last-login">Last Login</strong>
+          </div>
+
+          {currentUsers.length === 0 ? (
+            <div className="no-users">No matching users found.</div>
+          ) : (
+            currentUsers.map((user) => (
+              <div
+                key={user.uid}
+                className={`userlist-row role-${user.role?.toLowerCase()}`}
+              >
+                <p className="col-uid">{user.uid}</p>
+                <p className="col-fullname">{user.fullname}</p>
+                <p className="col-username">{user.name}</p>
+                <p className="col-email">{user.email}</p>
+                <p className="col-role">{user.role}</p>
+                <p className="col-created">{user.created}</p>
+                <p className="col-last-login">{user.last_login}</p>
+              </div>
+            ))
+          )}
+        </div>
+
+        {filteredAndSortedUsers.length > usersPerPage && (
+          <div className="pagination-wrapper">
+            <div className="pagination">
+              <button
+                className="pagination-btn"
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage((prev) => prev - 1)}
+              >
+                ⬅️
+              </button>
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index + 1}
+                  className={`pagination-btn ${currentPage === index + 1 ? "active" : ""}`}
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              ))}
+              <button
+                className="pagination-btn"
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage((prev) => prev + 1)}
+              >
+                ➡️
+              </button>
+            </div>
+            <div className="page-info">
+              Showing {indexOfFirstUser + 1} -{" "}
+              {Math.min(indexOfLastUser, filteredAndSortedUsers.length)} of{" "}
+              {filteredAndSortedUsers.length} Users
+            </div>
+          </div>
         )}
       </div>
-
-      {filteredAndSortedUsers.length > usersPerPage && (
-        <div className="pagination-wrapper">
-          <div className="pagination">
-            <button
-              className="pagination-btn"
-              disabled={currentPage === 1}
-              onClick={() => setCurrentPage((prev) => prev - 1)}
-            >
-              ⬅️
-            </button>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index + 1}
-                className={`pagination-btn ${currentPage === index + 1 ? "active" : ""}`}
-                onClick={() => setCurrentPage(index + 1)}
-              >
-                {index + 1}
-              </button>
-            ))}
-            <button
-              className="pagination-btn"
-              disabled={currentPage === totalPages}
-              onClick={() => setCurrentPage((prev) => prev + 1)}
-            >
-              ➡️
-            </button>
-          </div>
-          <div className="page-info">
-            Showing {indexOfFirstUser + 1} -{" "}
-            {Math.min(indexOfLastUser, filteredAndSortedUsers.length)} of{" "}
-            {filteredAndSortedUsers.length} Users
-          </div>
-        </div>
-      )}
-    </div>
+    </>
   );
 }

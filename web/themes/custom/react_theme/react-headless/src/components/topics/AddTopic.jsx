@@ -63,12 +63,12 @@ export default function AddTopic() {
   };
 
   return (
-    <div className="create-task-container">
-      <div className="create-task-card">
-        <div className="create-task-header">
+    <div className="form-card-wrapper">
+      <div className="form-card">
+        <div className="form-header">
           <div>
             <h2>{t("topic.addNewTopic")}</h2>
-            <p className="create-task-subtitle">
+            <p className="form-subtitle">
               <span className="required">*</span> {t("common.requiredFields")}
             </p>
           </div>

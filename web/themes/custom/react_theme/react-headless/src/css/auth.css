@@ -39,8 +39,7 @@
 
 /* ── FORM STYLES ────────────────────────────────────– */
 
-.create-task-card,
-.add-testimonial-card {
+.form-card {
 	background: #ffffff;
 	border: 1px solid #e5e7eb;
 	border-radius: 8px;
@@ -50,13 +49,11 @@
 	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.create-task-header,
-.add-testimonial-header {
+.form-header {
 	align-items: flex-start;
 }
 
-.create-task-subtitle,
-.add-testimonial-subtitle {
+.form-subtitle {
 	margin: 6px 0 0;
 	font-size: 13px;
 	color: #6b7280;
@@ -306,7 +303,7 @@
 }
 
 .auth-link:hover {
-  text-decoration: underline;
+  color: var(--color-severity-critical-text);
 }
 
 /* ── RESPONSIVE ────────────────────────────────────– */
@@ -318,8 +315,7 @@
     padding-top: 40px;
   }
 
-	.create-task-card,
-	.add-testimonial-card {
+	.form-card {
 		padding: 24px;
 	}
 }
@@ -341,14 +337,13 @@
     font-size: var(--font-size-2xl);
   }
 
-	.create-task-card,
-	.add-testimonial-card {
+	.form-card {
 		padding: 16px;
 	}
 
-	.create-task-header,
-	.add-testimonial-header {
+	.form-header {
 		flex-direction: column;
+    text-align: center;
 	}
 
 	.form-group.form-group-inline,

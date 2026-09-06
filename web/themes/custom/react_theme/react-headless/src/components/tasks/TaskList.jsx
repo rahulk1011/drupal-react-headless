@@ -132,173 +132,175 @@ export default function TaskList() {
   });
 
   return (
-    <div className="tasklist-container">
-      <div className="tasklist-header">
-        <div>
-          <div className="tasklist-breadcrumb">
-            <button
-              type="button"
-              className="back-to-dashboard-link"
-              onClick={() => navigate("/dashboard")}
-            >
-              ← Dashboard
-            </button>
-            <span className="breadcrumb-sep">/</span>
-            <span>Task List</span>
+    <>
+      <div className="breadcrumb">
+        <button
+          type="button"
+          className="back-to-dashboard-link"
+          onClick={() => navigate("/dashboard")}
+        >
+          ← Dashboard
+        </button>
+        <span className="breadcrumb-sep">/</span>
+        <span className="breadcrumb-location">Task List</span>
+      </div>
+      <div className="tasklist-container">
+        <div className="tasklist-header">
+          <div>
+            <h1>Task List ({filteredTasks.length})</h1>
+            <p className="tasklist-scope">
+              {isAdmin
+                ? "Showing all tasks across all users."
+                : "Showing tasks assigned to you."}
+            </p>
           </div>
-          <h2>Task List ({filteredTasks.length})</h2>
-          <p className="tasklist-scope">
-            {isAdmin
-              ? "Showing all tasks across all users."
-              : "Showing tasks assigned to you."}
-          </p>
+          {!isClient && (
+            <button
+              className="btn-admin add-task-btn"
+              onClick={() => navigate("/create-task")}
+            >
+              + Add Task
+            </button>
+          )}
         </div>
-        {!isClient && (
-          <button
-            className="btn-admin add-task-btn"
-            onClick={() => navigate("/create-task")}
-          >
-            + Add Task
-          </button>
+
+        {/* Project Filter Controls */}
+        {!isLoading && !error && (
+          <div className="tasklist-filter-bar">
+            <label htmlFor="project-filter">Filter by Project:</label>
+            {projects.length === 0 ? (
+              <span
+                className="no-project-assigned-text"
+                style={{ fontWeight: "500", marginLeft: "8px" }}
+              >
+                No Projects Available
+              </span>
+            ) : (
+              <select
+                id="project-filter"
+                value={selectedProject}
+                onChange={(e) => setSelectedProject(e.target.value)}
+              >
+                <option value="all">All Projects</option>
+                {projects.map((proj) => (
+                  <option key={proj.id || proj.name} value={proj.name}>
+                    {proj.name}
+                  </option>
+                ))}
+              </select>
+            )}
+          </div>
+        )}
+
+        {isLoading && <div className="tasklist-loading">Loading tasks...</div>}
+        {error && <div className="tasklist-error">{error}</div>}
+
+        {!isLoading && !error && (
+          <div className="tasklist-body">
+            {filteredTasks.length === 0 ? (
+              <div className="no-tasks">No Active Tasks Found</div>
+            ) : (
+              <div className="task-board">
+                {COLUMNS.map((col) => {
+                  const colTasks =
+                    col.key === "open"
+                      ? [...(grouped.open || []), ...other]
+                      : grouped[col.key] || [];
+
+                  return (
+                    <div
+                      key={col.key}
+                      className={`task-column task-column--${col.key}`}
+                    >
+                      <div className="task-column__header">
+                        <span className={`badge status-${col.key}`}>
+                          {col.label}
+                        </span>
+                        <span className="task-column__count">
+                          {colTasks.length}
+                        </span>
+                      </div>
+
+                      <div className="task-column__cards">
+                        {colTasks.length === 0 ? (
+                          <div className="task-column__empty">No Tasks</div>
+                        ) : (
+                          colTasks.map((task) => {
+                            const taskId = task.node_id || task.task_id;
+                            const taskTitle = task.task_name || task.title;
+
+                            return (
+                              <div key={taskId} className="task-card">
+                                <div className="task-card-project-header">
+                                  <h2>{task.project_name}</h2>
+                                </div>
+                                <div className="task-card-header">
+                                  <h3>{taskTitle}</h3>
+                                </div>
+                                <p className="task-description">
+                                  {task.description}
+                                </p>
+                                <div className="task-card-people">
+                                  {task.created_by?.name && (
+                                    <p className="task-meta">
+                                      Created by{" "}
+                                      <strong>
+                                        {task.created_by.fullname ||
+                                          task.created_by.name}
+                                      </strong>
+                                    </p>
+                                  )}
+                                  {!isEngineer && task.assigned_to?.name && (
+                                    <p className="task-meta">
+                                      Assigned to{" "}
+                                      <strong>
+                                        {task.assigned_to.fullname ||
+                                          task.assigned_to.name}
+                                      </strong>
+                                    </p>
+                                  )}
+                                </div>
+                                <div className="task-card-footer">
+                                  <span className="task-due-date">
+                                    📅 Due: {task.due_date || "N/A"}
+                                  </span>
+                                  <span className="task-severity">
+                                    Severity:{" "}
+                                    <span
+                                      className={`badge severity-${(
+                                        task.severity || ""
+                                      ).toLowerCase()}`}
+                                    >
+                                      {task.severity}
+                                    </span>
+                                  </span>
+                                </div>
+                                {!isClient && (
+                                  <button
+                                    type="button"
+                                    className="task-edit-btn"
+                                    onClick={() =>
+                                      navigate(`/edit-task/${taskId}`, {
+                                        state: { task },
+                                      })
+                                    }
+                                  >
+                                    Edit Task
+                                  </button>
+                                )}
+                              </div>
+                            );
+                          })
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         )}
       </div>
-
-      {/* Project Filter Controls */}
-      {!isLoading && !error && (
-        <div className="tasklist-filter-bar">
-          <label htmlFor="project-filter">Filter by Project:</label>
-          {projects.length === 0 ? (
-            <span
-              className="no-project-assigned-text"
-              style={{ fontWeight: "500", marginLeft: "8px" }}
-            >
-              No Projects Available
-            </span>
-          ) : (
-            <select
-              id="project-filter"
-              value={selectedProject}
-              onChange={(e) => setSelectedProject(e.target.value)}
-            >
-              <option value="all">All Projects</option>
-              {projects.map((proj) => (
-                <option key={proj.id || proj.name} value={proj.name}>
-                  {proj.name}
-                </option>
-              ))}
-            </select>
-          )}
-        </div>
-      )}
-
-      {isLoading && <div className="tasklist-loading">Loading tasks...</div>}
-      {error && <div className="tasklist-error">{error}</div>}
-
-      {!isLoading && !error && (
-        <div className="tasklist-body">
-          {filteredTasks.length === 0 ? (
-            <div className="no-tasks">No Active Tasks Found</div>
-          ) : (
-            <div className="task-board">
-              {COLUMNS.map((col) => {
-                const colTasks =
-                  col.key === "open"
-                    ? [...(grouped.open || []), ...other]
-                    : grouped[col.key] || [];
-
-                return (
-                  <div
-                    key={col.key}
-                    className={`task-column task-column--${col.key}`}
-                  >
-                    <div className="task-column__header">
-                      <span className={`badge status-${col.key}`}>
-                        {col.label}
-                      </span>
-                      <span className="task-column__count">
-                        {colTasks.length}
-                      </span>
-                    </div>
-
-                    <div className="task-column__cards">
-                      {colTasks.length === 0 ? (
-                        <div className="task-column__empty">No Tasks</div>
-                      ) : (
-                        colTasks.map((task) => {
-                          const taskId = task.node_id || task.task_id;
-                          const taskTitle = task.task_name || task.title;
-
-                          return (
-                            <div key={taskId} className="task-card">
-                              <div className="task-card-project-header">
-                                <h2>{task.project_name}</h2>
-                              </div>
-                              <div className="task-card-header">
-                                <h3>{taskTitle}</h3>
-                              </div>
-                              <p className="task-description">
-                                {task.description}
-                              </p>
-                              <div className="task-card-people">
-                                {task.created_by?.name && (
-                                  <p className="task-meta">
-                                    Created by{" "}
-                                    <strong>
-                                      {task.created_by.fullname ||
-                                        task.created_by.name}
-                                    </strong>
-                                  </p>
-                                )}
-                                {!isEngineer && task.assigned_to?.name && (
-                                  <p className="task-meta">
-                                    Assigned to{" "}
-                                    <strong>
-                                      {task.assigned_to.fullname ||
-                                        task.assigned_to.name}
-                                    </strong>
-                                  </p>
-                                )}
-                              </div>
-                              <div className="task-card-footer">
-                                <span className="task-due-date">
-                                  📅 Due: {task.due_date || "N/A"}
-                                </span>
-                                <span className="task-severity">
-                                  Severity:{" "}
-                                  <span
-                                    className={`badge severity-${(
-                                      task.severity || ""
-                                    ).toLowerCase()}`}
-                                  >
-                                    {task.severity}
-                                  </span>
-                                </span>
-                              </div>
-                              {!isClient && (
-                                <button
-                                  type="button"
-                                  className="task-edit-btn"
-                                  onClick={() =>
-                                    navigate(`/edit-task/${taskId}`, {
-                                      state: { task },
-                                    })
-                                  }
-                                >
-                                  Edit Task
-                                </button>
-                              )}
-                            </div>
-                          );
-                        })
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      )}
-    </div>
+    </>
   );
 }
