@@ -134,7 +134,11 @@
 		"projectCreated": "Created",
 		"projectDescription": "Project Description",
 		"projectDescriptionPlaceholder": "Enter detailed project description",
-		"backToProjects": "Back to Projects"
+		"backToProjects": "Back to Projects",
+		"projectDetailsTab": "Project Details",
+		"clientDetailsTab": "Client Information",
+		"step1": "Step 1",
+		"step2": "Step 2"
 	},
 
 	"client" : {
@@ -207,7 +211,9 @@
     "backToDashboard": "Back to Dashboard",
     "backToTasks": "Back to Tasks",
     "saving": "Saving",
-		"saveChanges": "Save Changes"
+		"saveChanges": "Save Changes",
+		"next": "Next",
+		"back": "Back"
   },
 
   "footer": {

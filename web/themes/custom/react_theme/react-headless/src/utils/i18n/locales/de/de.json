@@ -134,7 +134,11 @@
 		"projectCreated": "Erstellt",
 		"projectDescription": "Projektbeschreibung",
 		"projectDescriptionPlaceholder": "Detaillierte Projektbeschreibung eingeben",
-		"backToProjects": "Zurück zu den Projekten"
+		"backToProjects": "Zurück zu den Projekten",
+		"projectDetailsTab": "Projektdetails",
+		"clientDetailsTab": "Kundeninformationen",
+		"step1": "Schritt 1",
+		"step2": "Schritt 2"
 	},
 
 	"client" : {
@@ -207,7 +211,9 @@
     "backToDashboard": "Zurück zum Dashboard",
     "backToTasks": "Zurück zu den Aufgaben",
     "saving": "Speichern",
-		"saveChanges": "Änderungen speichern"
+		"saveChanges": "Änderungen speichern",
+		"next": "Weiter",
+		"back": "Zurück"
   },
 
   "footer": {

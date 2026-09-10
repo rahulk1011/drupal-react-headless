@@ -1,40 +1,40 @@
 /* ============================================================================
-	AUTHENTICATION PAGES (LOGIN & REGISTER)
-	========================================================================== */
+  AUTHENTICATION PAGES (LOGIN & REGISTER)
+  ========================================================================== */
 
 /* ── LOGIN & REGISTER PAGE ───────────────────────────– */
 
 .login-wrapper,
 .register-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 48px;
-  min-height: calc(75vh - 120px);
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 48px;
+	min-height: calc(75vh - 120px);
 }
 
 .login-card,
 .register-card {
-  background: linear-gradient(135deg, #1A2980, #26D0CE);
-  padding: 40px;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-xl);
-  width: 100%;
-  max-width: 512px;
+	background: linear-gradient(135deg, #1A2980, #26D0CE);
+	padding: 40px;
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-xl);
+	width: 100%;
+	max-width: 512px;
 }
 
 .login-card h1,
 .register-card h1 {
-  margin: 0 0 8px;
-  font-size: var(--font-size-3xl);
-  color: #FFFFFF;
+	margin: 0 0 8px;
+	font-size: var(--font-size-3xl);
+	color: #FFFFFF;
 }
 
 .login-card p,
 .register-card p {
-  margin: 0 0 24px;
-  font-size: var(--font-size-lg);
-  color: #E0F7FA;
+	margin: 0 0 24px;
+	font-size: var(--font-size-lg);
+	color: #E0F7FA;
 }
 
 .login-card .form-group .form-label,
@@ -84,9 +84,16 @@ p.form-hint {
 }
 
 .form-subtitle {
-	margin: 6px 0 0;
-	font-size: 13px;
+	margin: 10px 0 0;
+	font-size: 14px;
 	color: #6b7280;
+}
+
+.required {
+	color: var(--color-error);
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-xl);
+	line-height: var(--line-height-tight);
 }
 
 .edit-task-assigned-to {
@@ -96,16 +103,16 @@ p.form-hint {
 }
 
 .form-group {
-  margin-bottom: 20px;
-  text-align: left;
+	margin-bottom: 20px;
+	text-align: left;
 }
 
 .form-group label {
 	display: block;
 	font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  color: #374151;
-  margin-bottom: 6px;
+	font-weight: var(--font-weight-medium);
+	color: #374151;
+	margin-bottom: 6px;
 }
 
 .form-group input,
@@ -121,11 +128,11 @@ p.form-hint {
 }
 
 .form-label {
-  display: block;
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  color: #374151;
-  margin-bottom: 6px;
+	display: block;
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-medium);
+	color: #374151;
+	margin-bottom: 6px;
 }
 
 .form-label-row {
@@ -135,9 +142,9 @@ p.form-hint {
 }
 
 .char-count {
-  font-size: 12px;
-  color: #94a3b8;
-  white-space: nowrap;
+	font-size: 12px;
+	color: #94a3b8;
+	white-space: nowrap;
 }
 
 .form-group.form-group-inline {
@@ -161,20 +168,21 @@ p.form-hint {
 }
 
 .form-group input[type="file"]::file-selector-button {
-  margin-right: 12px;
-  padding: 6px 12px;
-  border-radius: 4px;
-  border: none;
-  background-color: #f1f5f9;
-  color: #334155;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
+	margin-right: 12px;
+	padding: 6px 12px;
+	border-radius: 4px;
+	border: none;
+	background-color: #f1f5f9;
+	color: #334155;
+	font-size: 14px;
+	font-family: inherit;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background-color 0.15s ease;
 }
 
 .form-group input[type="file"]::file-selector-button:hover {
-  background-color: #e2e8f0;
+	background-color: #e2e8f0;
 }
 
 .form-actions {
@@ -200,37 +208,120 @@ p.form-hint {
 }
 
 .alert-success {
-  background-color: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  color: #166534;
-  padding: 10px 14px;
-  border-radius: var(--radius-base);
-  font-size: var(--font-size-base);
-  margin-bottom: 20px;
+	background-color: #f0fdf4;
+	border: 1px solid #bbf7d0;
+	color: #166534;
+	padding: 10px 14px;
+	border-radius: var(--radius-base);
+	font-size: var(--font-size-base);
+	margin-bottom: 20px;
+}
+
+/* Add Project Step form code */
+/* Stepper Layout */
+.stepper-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 24px 0;
+	padding: 12px;
+	background-color: #f8fafc;
+	border-radius: 8px;
+	border: 1px solid #e2e8f0;
+}
+
+.step-item {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	cursor: pointer;
+	user-select: none;
+}
+
+.step-badge {
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	background-color: #cbd5e1;
+	color: #475569;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+	font-size: 12px;
+	transition: all 0.2s ease;
+}
+
+.step-label-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.step-number {
+	font-size: 12px;
+	color: #64748b;
+	text-transform: uppercase;
+	font-weight: 600;
+}
+
+.step-title {
+	font-size: 14px;
+	font-weight: 600;
+	color: #334155;
+}
+
+/* Active & Completed States */
+.step-item.active .step-badge {
+	background-color: #2563eb;
+	color: #ffffff;
+}
+
+.step-item.active .step-title {
+	color: #2563eb;
+}
+
+.step-item.completed .step-badge {
+	background-color: #10b981;
+	color: #ffffff;
+}
+
+.step-connector {
+	flex: 1;
+	height: 2px;
+	background-color: #e2e8f0;
+	margin: 0 16px;
+}
+
+/* Sub-section headings */
+.section-title {
+	font-size: 18px;
+	font-weight: 600;
+	margin-bottom: 16px;
+	color: #1e293b;
 }
 
 /* ── BUTTONS ────────────────────────────────────────– */
 
 .btn-login {
-  width: 100%;
-  padding: 10px 16px;
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-bold);
-  border-radius: var(--radius-base);
-  cursor: pointer;
-  transition: background-color var(--transition-normal), border-color var(--transition-normal);
-  box-sizing: border-box;
+	width: 100%;
+	padding: 10px 16px;
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-bold);
+	border-radius: var(--radius-base);
+	cursor: pointer;
+	transition: background-color var(--transition-normal), border-color var(--transition-normal);
+	box-sizing: border-box;
 }
 
 .btn-sign-in {
-  background-color: #0A192F;
-  color: #E0F7FA;
-  margin-top: 16px;
+	background-color: #0A192F;
+	color: #E0F7FA;
+	margin-top: 16px;
 }
 
 .btn-sign-in:hover {
-  background-color: var(--color-primary-hover);
-  color: var(--color-primary);
+	background-color: var(--color-primary-hover);
+	color: var(--color-primary);
 }
 
 .btn-login-register {
@@ -239,27 +330,27 @@ p.form-hint {
 }
 
 .btn-login-register:hover {
-  background-color: var(--color-primary-light);
-  color: var(--color-primary);
+	background-color: var(--color-primary-light);
+	color: var(--color-primary);
 }
 
 .btn-register {
-  width: 100%;
-  padding: 10px 16px;
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-bold);
-  border-radius: var(--radius-base);
-  cursor: pointer;
-  transition: background-color var(--transition-normal), border-color var(--transition-normal);
-  box-sizing: border-box;
-  background-color: #0A192F;
-  color: #E0F7FA;
-  margin-top: 16px;
+	width: 100%;
+	padding: 10px 16px;
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-bold);
+	border-radius: var(--radius-base);
+	cursor: pointer;
+	transition: background-color var(--transition-normal), border-color var(--transition-normal);
+	box-sizing: border-box;
+	background-color: #0A192F;
+	color: #E0F7FA;
+	margin-top: 16px;
 }
 
 .btn-register:hover {
-  background-color: var(--color-primary-hover);
-  color: var(--color-primary);
+	background-color: var(--color-primary-hover);
+	color: var(--color-primary);
 }
 
 .btn-primary {
@@ -296,54 +387,54 @@ p.form-hint {
 /* ── DIVIDER ────────────────────────────────────────– */
 
 .auth-divider {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  margin: 24px 0 16px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	margin: 24px 0 16px;
 }
 
 .auth-divider::before,
 .auth-divider::after {
-  content: "";
-  flex: 1;
-  border-bottom: 1px solid var(--color-border-primary);
+	content: "";
+	flex: 1;
+	border-bottom: 1px solid var(--color-border-primary);
 }
 
 .auth-divider span {
-  padding: 0 10px;
-  color: #FFFFFF;
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
+	padding: 0 10px;
+	color: #FFFFFF;
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-medium);
 }
 
 /* ── FOOTER LINKS ───────────────────────────────────– */
 
 .auth-footer {
-  margin-top: 24px;
-  text-align: center;
-  font-size: var(--font-size-lg);
+	margin-top: 24px;
+	text-align: center;
+	font-size: var(--font-size-lg);
 	font-weight: var(--font-weight-semibold);
-  color: #E0F7FA;
+	color: #E0F7FA;
 }
 
 .auth-link {
-  color: var(--color-primary);
-  font-weight: var(--font-weight-semibold);
-  text-decoration: none;
+	color: var(--color-primary);
+	font-weight: var(--font-weight-semibold);
+	text-decoration: none;
 }
 
 .auth-link:hover {
-  color: var(--color-severity-critical-text);
+	color: var(--color-severity-critical-text);
 }
 
 /* ── RESPONSIVE ────────────────────────────────────– */
 
 @media (max-width: 768px) {
-  .login-wrapper,
-  .register-wrapper {
-    padding: 24px;
-    padding-top: 40px;
-  }
+	.login-wrapper,
+	.register-wrapper {
+		padding: 24px;
+		padding-top: 40px;
+	}
 
 	.form-card {
 		padding: 24px;
@@ -351,21 +442,22 @@ p.form-hint {
 }
 
 @media (max-width: 480px) {
-  .login-wrapper,
-  .register-wrapper {
-    padding: 24px;
-    padding-top: 32px;
-  }
 
-  .login-card,
-  .register-card {
-    padding: 24px 20px;
-  }
+	.login-wrapper,
+	.register-wrapper {
+		padding: 24px;
+		padding-top: 32px;
+	}
 
-  .login-card h1,
-  .register-card h1 {
-    font-size: var(--font-size-2xl);
-  }
+	.login-card,
+	.register-card {
+		padding: 24px 20px;
+	}
+
+	.login-card h1,
+	.register-card h1 {
+		font-size: var(--font-size-2xl);
+	}
 
 	.form-card {
 		padding: 16px;
@@ -373,7 +465,7 @@ p.form-hint {
 
 	.form-header {
 		flex-direction: column;
-    text-align: center;
+		text-align: center;
 	}
 
 	.form-group.form-group-inline,
