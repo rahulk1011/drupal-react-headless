@@ -1,6 +1,6 @@
 name: React Theme
 type: theme
-description: "Custom Drupal theme that embeds a React 19 SPA for content management. Source lives in react-headless/ and is compiled (via `npm run build`) into js/app.js + css/app.css."
+description: "Custom Drupal theme that embeds a React 19 SPA for content management."
 package: Custom
 core_version_requirement: ^10 || ^11
 base theme: false
