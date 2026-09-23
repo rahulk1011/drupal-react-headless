@@ -4,6 +4,7 @@ import { useAuth } from "../../hooks/useAuth";
 import "../../css/index.css";
 import { useTranslation } from "react-i18next";
 import { getLanguages } from "../../api/client";
+import drupalreact from '../../../drupalreact.png';
 
 export default function TopBar() {
   const { user, logout } = useAuth() || {};
@@ -85,7 +86,7 @@ export default function TopBar() {
     <header className="app-topbar">
       <div className="app-topbar__inner">
         <Link to="/" className="app-topbar__brand">
-          🗂 Drupal React CMS
+          <img src={drupalreact} alt="Drupal React Logo" />Drupal React CMS
         </Link>
 
         <div className="app-topbar__actions">

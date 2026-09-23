@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../css/index.css";
 import { useTranslation } from "react-i18next";
+import drupalreact from '../../../drupalreact.png';
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -11,7 +12,7 @@ export default function Footer() {
     <footer className="app-footer">
       <div className="app-footer__inner">
         <div className="app-footer__brand">
-          <span className="app-footer__logo">🗂</span>
+          <span className="app-footer__logo"><img src={drupalreact} alt="Drupal React Logo" /></span>
           <span className="app-footer__name">Drupal React CMS</span>
           <p className="app-footer__tagline">
             {t("footer.description")}

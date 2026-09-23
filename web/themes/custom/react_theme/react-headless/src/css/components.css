@@ -6,7 +6,7 @@
 
 .app-topbar {
   width: 100%;
-  background-color: #0f2d5e;
+  background-color: #0f172a;
   border-bottom: 2px solid var(--color-accent-border);
   position: sticky;
   top: 0;
@@ -26,15 +26,23 @@
 .app-topbar__brand {
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
-  color: var(--color-text-inverse);
+  color: var(--color-primary-light);
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 8px;
 }
 
 .app-topbar__brand:hover {
-  color: #E97F02;
-	text-decoration: none;
+  color: var(--color-primary-hover);
+}
+
+.app-topbar__brand img {
+	height: 40px;
+	width: auto;
 }
 
 .app-topbar__actions {
@@ -94,7 +102,7 @@
   font-weight: var(--font-weight-semibold);
   color: #031634;
   background: #EBF7F8;
-  border: 2px solid #FF8A00;
+  border: none;
   border-radius: var(--radius-base);
   cursor: pointer;
   outline: none;
@@ -115,7 +123,7 @@
 
 .language-switcher:hover,
 .language-switcher:focus {
-  border-color: #F03C02;
+  background-color: var(--color-role-engineer);
 }
 
 .language-switcher option {
@@ -278,9 +286,9 @@
 	max-width: 400px;
 }
 
-.app-footer__logo {
-	font-size: 24px;
-	line-height: 1;
+.app-footer__logo img {
+	height: 32px;
+	width: auto;
 }
 
 .app-footer__name {

@@ -9,8 +9,8 @@ class WelcomeController {
   public function welcome() {
     $page_content = '<div>' .
       '<h2>Overview</h2>' .
-      '<p>A monorepo that combines a Drupal 11 backend with a React 19 single-page application (SPA) embedded in a custom Drupal theme. The project exposes custom REST resources for managing Content and Project Trackers, while Drupal remains the content, authentication, permissions, and API layer.</p>' .
-      
+      '<p>A monorepo that combines a Drupal 11 backend with a React 19 single-page application embedded in a custom Drupal theme. The project exposes custom REST resources for managing Content and Project Trackers, while Drupal remains the content, authentication, permissions, and API layer.</p>' .
+
       '<h2>Key Features</h2>' .
       '<ul>' .
       '<li>Drupal 11 backend managed through Composer</li>' .
@@ -21,10 +21,10 @@ class WelcomeController {
       '<li>Drupal session or HTTP Basic authentication support</li>' .
       '<li>CSRF protection for mutating requests</li>' .
       '</ul>' .
-      
+
       '<h2>Architecture</h2>' .
       '<p>Drupal acts as the CMS and API provider. React consumes Drupal\'s REST API endpoints and renders the user interface. Production frontend assets can be built and served through the custom Drupal theme, while the Vite development server can be used during frontend development.</p>' .
-      
+
       '<h2>Technical Highlights</h2>' .
       '<ul>' .
       '<li><strong>Headless Drupal Architecture:</strong> Decoupled Drupal and React architecture powered by RESTful integrations</li>' .
@@ -36,7 +36,7 @@ class WelcomeController {
       '<li><strong>API-First Design Pattern:</strong> Business functionality exposed through reusable and scalable APIs</li>' .
       '<li><strong>Multilingual Support:</strong> Language-aware APIs and React internationalization</li>' .
       '</ul>' .
-      
+
       '<h2>Functional Highlights</h2>' .
       '<ul>' .
       '<li><strong>Client Information System:</strong> Centralized management of client and project-related information</li>' .
