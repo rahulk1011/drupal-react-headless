@@ -4,6 +4,8 @@ web/core
 web/modules/contrib
 web/themes/contrib
 web/web.config
+keys
+keys/*.key
 
 web/sites/*/*settings*.php
 web/sites/*/*services*.yml
