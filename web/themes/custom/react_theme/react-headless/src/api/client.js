@@ -1,10 +1,11 @@
 import axios from "axios";
+import { setBackendStatus } from "./backendStatus";
 
 // Single Axios client for all Drupal REST calls made by this SPA.
 
 /** Resolve the Drupal base URL: prefer drupalSettings (theme-embedded mode),
  *  fall back to the Vite env var (standalone dev-server mode). */
-function getBaseUrl() {
+export function getBaseUrl() {
   if (
     typeof window !== "undefined" &&
     window.drupalSettings?.reactApp?.baseUrl
@@ -34,21 +35,65 @@ API_URL.interceptors.request.use((config) => {
   return config;
 });
 
-/** Unwrap Drupal's REST error shapes into plain Error objects so callers can just read `err.message`. */
+/**
+ * Unwrap Drupal's REST error shapes into Error objects so callers can read `err.message`,
+ * and classify the failure so the UI can tell "backend is down" from "no data".
+ *
+ * `err.kind` is one of:
+ *   - "maintenance" : Drupal answered 503 (maintenance mode)
+ *   - "network"     : no response at all (server down, DNS, CORS blocked, offline)
+ *   - "server"      : any other HTTP error (4xx/5xx)
+ */
 API_URL.interceptors.response.use(
-  (res) => res,
+  (res) => {
+    // Any successful response proves the backend is up.
+    setBackendStatus("ok");
+    return res;
+  },
   (err) => {
+    const status = err.response?.status ?? null;
     const body = err.response?.data;
     const message =
       (typeof body === "string" ? body : null) ||
-      body?.result ||
       body?.message ||
+      body?.result ||
       body?.error ||
       err.message ||
       "An unexpected error occurred.";
-    return Promise.reject(new Error(message));
+
+    let kind = "server";
+    if (status === 503) kind = "maintenance";
+    else if (!err.response) kind = "network";
+
+    if (kind === "maintenance") {
+      setBackendStatus("maintenance", message);
+    } else if (kind === "network") {
+      setBackendStatus("unreachable", message);
+    }
+
+    const error = new Error(message);
+    error.status = status;
+    error.kind = kind;
+    return Promise.reject(error);
   },
 );
+
+/** True when the failure means the Drupal backend is unavailable (maintenance or unreachable). */
+export const isBackendDown = (err) =>
+  err?.kind === "maintenance" || err?.kind === "network";
+
+/**
+ * Lightweight probe used by the status provider to detect recovery.
+ * Resolves `true` when the backend answers 2xx, `false` otherwise. Never throws.
+ */
+export const checkBackendHealth = async () => {
+  try {
+    await API_URL.get("/api/health?_format=json", { timeout: 8000 });
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 // Auth Services
 /** Logs in via the custom /api/user-login resource and persists the CSRF /

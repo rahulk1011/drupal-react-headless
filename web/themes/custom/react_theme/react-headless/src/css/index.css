@@ -31,3 +31,6 @@
 
 /* ── GLOBAL COMPONENTS ────────────────────────────– */
 @import url('./components.css');
+
+/* ── BACKEND STATUS (maintenance / error states) ───────────────── */
+@import url('./status.css');

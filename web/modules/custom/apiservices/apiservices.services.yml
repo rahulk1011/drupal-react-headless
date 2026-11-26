@@ -3,3 +3,9 @@ services:
     class: Drupal\apiservices\EventSubscriber\CrossOriginSessionCookieSubscriber
     tags:
       - { name: event_subscriber }
+
+  apiservices.maintenance_api_subscriber:
+    class: Drupal\apiservices\EventSubscriber\MaintenanceApiSubscriber
+    arguments: ['@maintenance_mode', '@current_user']
+    tags:
+      - { name: event_subscriber }

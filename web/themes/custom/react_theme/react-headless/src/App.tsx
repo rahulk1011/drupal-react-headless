@@ -1,8 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./hooks/useAuth";
+import { BackendStatusProvider, useBackendStatus } from "./hooks/BackendStatusProvider";
 import type { ReactNode } from "react";
 
 import TopBar from "./components/layout/TopBar";
+import MaintenancePage from "./components/common/MaintenancePage";
 import Footer from "./components/layout/Footer";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -55,6 +57,20 @@ function AdminRoute({ children }: RouteProps) {
 }
 
 function AppLayout() {
+	const { isDown } = useBackendStatus();
+
+	// Drupal is in maintenance mode or unreachable: replace the app with a status page.
+	// The URL is untouched, so the user lands back on the same screen once it recovers.
+	if (isDown) {
+		return (
+			<div className="app-layout">
+				<main className="app-content">
+					<MaintenancePage />
+				</main>
+			</div>
+		);
+	}
+
 	return (
 		<div className="app-layout">
 			<TopBar />
@@ -147,9 +163,11 @@ function AppLayout() {
 export default function App() {
 	return (
 		<BrowserRouter>
-			<AuthProvider>
-				<AppLayout />
-			</AuthProvider>
+			<BackendStatusProvider>
+				<AuthProvider>
+					<AppLayout />
+				</AuthProvider>
+			</BackendStatusProvider>
 		</BrowserRouter>
 	);
 }

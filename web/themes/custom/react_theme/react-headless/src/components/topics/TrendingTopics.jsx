@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getTopics } from "../../api/client";
 import "../../css/index.css";
 import { useTranslation } from "react-i18next";
+import ErrorState from "../common/ErrorState";
 
 // Helper to strip HTML tags safely
 const stripHtml = (html) => {
@@ -48,6 +49,8 @@ function TrendingTopics() {
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
+    setLoading(true);
+    setError(null);
     getTopics(i18n.language)
       .then((response) => {
         const rawData = response.data.result || [];
@@ -65,7 +68,7 @@ function TrendingTopics() {
       })
       .catch((err) => {
         console.error("Error fetching topics:", err);
-        setError("Failed to load trending topics.");
+        setError(err);
       })
       .finally(() => setLoading(false));
   }, [i18n.language]);
@@ -83,7 +86,12 @@ function TrendingTopics() {
   }
 
   if (error) {
-    return <div className="error-message">{error}</div>;
+    return (
+      <ErrorState
+        message={t("backend.trendingError")}
+        compact
+      />
+    );
   }
 
   if (topics.length === 0) {
