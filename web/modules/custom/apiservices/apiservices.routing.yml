@@ -1,0 +1,7 @@
+apiservices.health:
+  path: '/api/health'
+  defaults:
+    _controller: '\Drupal\apiservices\Controller\HealthController::check'
+  methods: [GET]
+  requirements:
+    _access: 'TRUE'

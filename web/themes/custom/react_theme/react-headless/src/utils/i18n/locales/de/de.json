@@ -143,7 +143,8 @@
 
 	"client" : {
 		"clientListTitle": "Kundenliste",
-		"clientTestimonialTitle": "Kundenstimmen"
+		"clientTestimonialTitle": "Kundenstimmen",
+		"noClientsFound": "Keine Kunden gefunden."
 	},
 
 	"testimonial": {
@@ -213,7 +214,23 @@
     "saving": "Speichern",
 		"saveChanges": "Änderungen speichern",
 		"next": "Weiter",
-		"back": "Zurück"
+		"back": "Zurück",
+		"loading": "Wird geladen..."
+  },
+
+  "backend": {
+    "maintenanceTitle": "Wir sind gleich wieder da",
+    "maintenanceBody": "Die Seite wird gerade gewartet. Bitte schauen Sie in Kürze wieder vorbei.",
+    "unreachableTitle": "Server nicht erreichbar",
+    "unreachableBody": "Wir konnten keine Verbindung zum Server herstellen. Bitte prüfen Sie Ihre Internetverbindung oder versuchen Sie es gleich noch einmal.",
+    "genericError": "Beim Laden dieser Inhalte ist ein Fehler aufgetreten.",
+    "topicsError": "Themen konnten nicht geladen werden.",
+    "clientsError": "Kunden konnten nicht geladen werden.",
+    "testimonialsError": "Referenzen konnten nicht geladen werden.",
+    "trendingError": "Trendende Themen konnten nicht geladen werden.",
+    "dashboardError": "Dashboard-Details konnten nicht geladen werden.",
+    "tasksError": "Aufgaben konnten nicht geladen werden.",
+    "loadingDashboard": "Dashboard wird geladen..."
   },
 
   "footer": {

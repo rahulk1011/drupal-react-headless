@@ -3,3 +3,7 @@ type: module
 description: "A custom module to manage Event content-type using oauth and provide API endpoints."
 package: Custom
 core_version_requirement: ^11
+dependencies:
+  - drupal:rest
+  - simple_oauth:simple_oauth
+  - consumers:consumers

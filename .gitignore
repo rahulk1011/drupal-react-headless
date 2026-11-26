@@ -26,3 +26,4 @@ web/themes/custom/react_theme/react-headless/.env.example
 
 # DDEV files
 .ddev
+*.sql.gz
