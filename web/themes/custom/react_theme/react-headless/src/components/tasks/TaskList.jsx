@@ -4,6 +4,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { getTasks } from "../../api/client";
 import "../../css/index.css";
 import { useTranslation } from "react-i18next";
+import ErrorState from "../common/ErrorState";
 
 const COLUMNS = [
   { key: "open", label: "Open" },
@@ -30,6 +31,7 @@ export default function TaskList() {
   useEffect(() => {
     let isMounted = true;
     setIsLoading(true);
+    setError(null);
 
     getTasks()
       .then((tasksRes) => {
@@ -97,7 +99,7 @@ export default function TaskList() {
       .catch((err) => {
         if (!isMounted) return;
         console.error("Error fetching tasks:", err);
-        setError("Failed to load task list. Please try again.");
+        setError(err);
       })
       .finally(() => {
         if (isMounted) setIsLoading(false);
@@ -195,7 +197,11 @@ export default function TaskList() {
         )}
 
         {isLoading && <div className="tasklist-loading">Loading tasks...</div>}
-        {error && <div className="tasklist-error">{error}</div>}
+        {error && (
+          <ErrorState
+            message={t("backend.tasksError")}
+          />
+        )}
 
         {!isLoading && !error && (
           <div className="tasklist-body">

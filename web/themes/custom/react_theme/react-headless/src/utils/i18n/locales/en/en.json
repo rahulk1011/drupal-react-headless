@@ -143,7 +143,8 @@
 
 	"client" : {
 		"clientListTitle": "Client List",
-		"clientTestimonialTitle": "Client Testimonials"
+		"clientTestimonialTitle": "Client Testimonials",
+		"noClientsFound": "No Clients Found."
 	},
 
 	"testimonial": {
@@ -213,7 +214,23 @@
     "saving": "Saving",
 		"saveChanges": "Save Changes",
 		"next": "Next",
-		"back": "Back"
+		"back": "Back",
+		"loading": "Loading..."
+  },
+
+  "backend": {
+    "maintenanceTitle": "We'll be right back",
+    "maintenanceBody": "The site is currently under maintenance. Please check back shortly.",
+    "unreachableTitle": "Can't reach the server",
+    "unreachableBody": "We couldn't connect to the server. Check your internet connection, or try again in a moment.",
+    "genericError": "Something went wrong while loading this content.",
+    "topicsError": "Topics could not be loaded.",
+    "clientsError": "Clients could not be loaded.",
+    "testimonialsError": "Testimonials could not be loaded.",
+    "trendingError": "Trending topics could not be loaded.",
+    "dashboardError": "Dashboard details could not be loaded.",
+    "tasksError": "Tasks could not be loaded.",
+    "loadingDashboard": "Loading dashboard..."
   },
 
   "footer": {

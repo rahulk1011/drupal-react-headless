@@ -1,0 +1,72 @@
+/* ============================================================================
+	BACKEND STATUS - maintenance page and shared error state
+	========================================================================== */
+
+/* ── MAINTENANCE PAGE ──────────────────────────────────────── */
+.maintenance-page {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 70vh;
+	padding: 48px 16px;
+	background: var(--color-bg-tertiary);
+}
+
+.maintenance-card {
+	width: 100%;
+	max-width: 520px;
+	padding: 40px 32px;
+	text-align: center;
+	background: var(--color-bg-primary);
+	border: 1px solid var(--color-border-primary);
+	border-radius: 12px;
+	box-shadow: 0 10px 30px rgba(11, 46, 89, 0.08);
+}
+
+.maintenance-logo {
+	width: 56px;
+	height: 56px;
+	margin: 0 auto 16px;
+}
+
+.maintenance-icon {
+	font-size: 40px;
+	line-height: 1;
+}
+
+.maintenance-title {
+	margin: 0 0 12px;
+	font-size: var(--font-size-3xl);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-primary);
+}
+
+.maintenance-body {
+	margin: 0 0 24px;
+	font-size: var(--font-size-md);
+	line-height: 1.6;
+	color: var(--color-text-secondary);
+}
+
+/* ── SHARED ERROR STATE ────────────────────────────────────── */
+.error-state {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	padding: 32px 16px;
+	text-align: center;
+	background: #fef2f2;
+	border: 1px solid #fecaca;
+	border-radius: 8px;
+	color: #991b1b;
+}
+
+.error-state--compact {
+	padding: 16px;
+}
+
+.error-state__text {
+	margin: 0;
+	font-size: var(--font-size-base);
+}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getTestimonials } from "../../api/client";
 import "../../css/index.css";
 import { useTranslation } from "react-i18next";
+import ErrorState from "./ErrorState";
 
 const stripHtml = (html) => {
   if (typeof window === "undefined") return html.replace(/<[^>]*>?/gm, "");
@@ -14,11 +15,17 @@ export default function Testimonials() {
   const [testimonials, setTestimonials] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    setLoading(true);
+    setError(null);
     getTestimonials()
       .then((response) => setTestimonials(response.data?.result || []))
-      .catch((err) => console.error("Error fetching testimonials:", err))
+      .catch((err) => {
+        console.error("Error fetching testimonials:", err);
+        setError(err);
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -32,7 +39,17 @@ export default function Testimonials() {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
   };
 
-  if (loading) return <div className="testimonials-container"><p>Loading...</p></div>;
+  if (loading) return <div className="testimonials-container"><p>{t("common.loading")}</p></div>;
+  if (error) {
+    return (
+      <div className="testimonials-container">
+        <ErrorState
+          message={t("backend.testimonialsError")}
+          compact
+        />
+      </div>
+    );
+  }
   if (!testimonials.length) return null;
 
   return (

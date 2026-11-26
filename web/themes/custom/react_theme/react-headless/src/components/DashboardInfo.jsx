@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { userDashboard } from "../api/client";
 import "../css/index.css";
 import { useTranslation } from "react-i18next";
+import ErrorState from "./common/ErrorState";
 
 export default function DashboardInfo() {
 	const { t } = useTranslation();
@@ -14,12 +15,15 @@ export default function DashboardInfo() {
 
   useEffect(() => {
     const fetchDashboard = async () => {
+      setLoading(true);
+      setError(null);
       try {
         const response = await userDashboard();
         const data = response.data?.result || response.result;
         setDashboardData(data);
       } catch (err) {
-        setError(err.message || "Failed to load dashboard data.");
+        console.error("Error fetching dashboard:", err);
+        setError(err);
       } finally {
         setLoading(false);
       }
@@ -27,8 +31,15 @@ export default function DashboardInfo() {
     fetchDashboard();
   }, []);
 
-  if (loading) return <div className="loading">Loading dashboard...</div>;
-  if (error) return <div className="error">{error}</div>;
+  if (loading) return <div className="loading">{t("backend.loadingDashboard")}</div>;
+  if (error) {
+    return (
+      <ErrorState
+        message={t("backend.dashboardError")}
+        compact
+      />
+    );
+  }
   if (!dashboardData) return null;
 
   const { user_data, project_data } = dashboardData;

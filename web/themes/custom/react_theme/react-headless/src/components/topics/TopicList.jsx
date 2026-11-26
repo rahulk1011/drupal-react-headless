@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "../../css/index.css";
 import { useTranslation } from "react-i18next";
+import ErrorState from "../common/ErrorState";
 
 // Helper to strip HTML tags for accurate character counting
 const stripHtml = (html) => {
@@ -18,15 +19,21 @@ const stripHtml = (html) => {
 function TopicList() {
   const [topics, setTopics] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedTopic, setSelectedTopic] = useState(null);
   const { t, i18n } = useTranslation();
 
   const CHARACTER_LIMIT = 250;
 
   useEffect(() => {
+    setLoading(true);
+    setError(null);
     getTopics(i18n.language)
-      .then((response) => setTopics(response.data.result))
-      .catch((error) => console.error("Error fetching topics:", error))
+      .then((response) => setTopics(response.data.result || []))
+      .catch((err) => {
+        console.error("Error fetching topics:", err);
+        setError(err);
+      })
       .finally(() => setLoading(false));
   }, [i18n.language]);
 
@@ -39,6 +46,15 @@ function TopicList() {
           </div>
         ))}
       </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <ErrorState
+        message={t("backend.topicsError")}
+        compact
+      />
     );
   }
 

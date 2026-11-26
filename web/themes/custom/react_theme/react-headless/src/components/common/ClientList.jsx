@@ -2,16 +2,23 @@ import React, { useState, useEffect } from "react";
 import { getClientList } from "../../api/client";
 import "../../css/index.css";
 import { useTranslation } from "react-i18next";
+import ErrorState from "./ErrorState";
 
 export default function ClientList() {
 	const { t } = useTranslation();
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    setLoading(true);
+    setError(null);
     getClientList()
       .then((response) => setClients(response.data?.result || []))
-      .catch((err) => console.error("Error fetching projects:", err))
+      .catch((err) => {
+        console.error("Error fetching clients:", err);
+        setError(err);
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -27,8 +34,17 @@ export default function ClientList() {
     );
   }
 
+  if (error) {
+    return (
+      <ErrorState
+        message={t("backend.clientsError")}
+        compact
+      />
+    );
+  }
+
   if (clients.length === 0) {
-    return <div className="no-projects">No Clients Found.</div>;
+    return <div className="no-projects">{t("client.noClientsFound")}</div>;
   }
 
   return (
