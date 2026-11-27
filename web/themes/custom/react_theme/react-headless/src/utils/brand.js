@@ -1,11 +1,9 @@
-import { getBaseUrl } from "../api/client";
+import drupalReactIcon from "../../../drupalreacticon.png";
 
 /**
- * Site logo served by Drupal from the theme root, so the image is shipped once
- * (not copied into the Vite build output). Resolved against the same base URL
- * the API uses: the Drupal origin when embedded, VITE_DRUPAL_API_URL standalone.
+ * Site logo served by Drupal from the theme root. Used in the maintenance page and as the favicon.
  */
-export const LOGO_URL = `${getBaseUrl()}/themes/custom/react_theme/drupalreacticon.png`;
+export const LOGO_URL = drupalReactIcon;
 
 /**
  * Points the page favicon at the site logo. Set at runtime because the logo
