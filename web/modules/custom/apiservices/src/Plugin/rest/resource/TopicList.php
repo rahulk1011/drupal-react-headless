@@ -66,17 +66,17 @@ class TopicList extends ResourceBase
 				->getCurrentLanguage()
 				->getId());
 
-			$project_nids = \Drupal::entityQuery('node')
+			$topic_nids = \Drupal::entityQuery('node')
 				->accessCheck(TRUE)
 				->condition('type', 'topic_list')
 				->condition('status', 1)
 				->execute();
 
-			$project_nodes = Node::loadMultiple($project_nids);
+			$topic_nodes = Node::loadMultiple($topic_nids);
 
 			$topic_list_data = [];
 
-			foreach ($project_nodes as $node) {
+			foreach ($topic_nodes as $node) {
 				if ($node->hasTranslation($langcode)) {
 					$node = $node->getTranslation($langcode);
 				}
@@ -130,8 +130,7 @@ class TopicList extends ResourceBase
 			$image_name = trim($data['image_name'] ?? 'topic.jpg');
 
 			// Validate mandatory fields
-			if (
-				empty($title) || empty($subheading) || empty($description) || empty($trending) || empty($langcode) || empty($base64_image) ) {
+			if (empty($title) || empty($subheading) || empty($description) || empty($trending) || empty($langcode) || empty($base64_image)) {
 				return new JsonResponse([
 					'status' => 'Error',
 					'message' => 'Missing required fields: Title, Subheading, Description, Trending, Language, and Image are mandatory.',
